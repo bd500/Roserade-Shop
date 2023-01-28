@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, ListGroup, Card, Button, Image } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../components/Rating";
-import products from "../products";
+import axios from "axios";
 
 function ProductScreen() {
-    const { id } = useParams();
-    const product = products.find((p) => p._id === id);
+    const [product, setProduct] = useState({});
+    const {id} = useParams();
+
+    useEffect(()=>{
+       const fetchProduct = async () => {
+        const {data} = await axios.get(`/api/products/${id}`);
+        setProduct(data); 
+       }
+
+        fetchProduct();
+    },[])
+
     return (
         <>
             <Link to={"/"} className="btn btn-light my-3">
@@ -28,7 +38,7 @@ function ProductScreen() {
                             />
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <h5>Price: $ {product.price.toFixed(2)}</h5>
+                            <h5>Price: $ {Number(product.price).toFixed(2)}</h5>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <span className="fw-bold">Description:</span>{" "}
@@ -44,7 +54,7 @@ function ProductScreen() {
                                     <Col>Price:</Col>
                                     <Col>
                                         <span className="fw-bold">
-                                            $ {product.price.toFixed(2)}
+                                            $ {Number(product.price).toFixed(2)}
                                         </span>
                                     </Col>
                                 </Row>

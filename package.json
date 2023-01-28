@@ -1,0 +1,30 @@
+{
+  "name": "roserade-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm start --prefix client",
+    "server": "nodemon server/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bd500/Roserade-Shop.git"
+  },
+  "author": "Quoc Bao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bd500/Roserade-Shop/issues"
+  },
+  "homepage": "https://github.com/bd500/Roserade-Shop#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
