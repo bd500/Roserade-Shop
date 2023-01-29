@@ -1,6 +1,5 @@
 const products = [
     {
-        _id: "1",
         name: "Carl Coat",
         image: "/images/carl_coat.jpg",
         description:
@@ -13,7 +12,6 @@ const products = [
         numReviews: 12,
     },
     {
-        _id: "2",
         name: "Mod Fleur Shirt Dress",
         image: "/images/mod_fleur_shirtdress.jpg",
         description: `Imbued with a '60s flair, this classic shirtdress is composed of sheer cotton-silk organza embroidered with a mod, oversized floral motif—statement-making on its own, or easy to layer over your swimsuit on your next escape.`,
@@ -25,7 +23,6 @@ const products = [
         numReviews: 8,
     },
     {
-        _id: "3",
         name: "Lya Sweater",
         image: "/images/lya_sweater.jpg",
         description: `The Lisa style in easy-care soft cotton quality is a ladies' sweater for a fashion-conscious outfit. Above all, the combination of soft cotton and the modern design characterize the high-quality look of this sweater. The knitted sweater for women is pleasant and modern in a brilliantly colored cotton mix.`,
@@ -37,7 +34,6 @@ const products = [
         numReviews: 12,
     },
     {
-        _id: "4",
         name: "Fleece 2-in-1 Hat",
         image: "/images/fleece_hat.jpg",
         description:
@@ -50,7 +46,6 @@ const products = [
         numReviews: 12,
     },
     {
-        _id: "5",
         name: "Hit The Slopes Sequin Jacket",
         image: "/images/sequin_jacket.jpg",
         description:
@@ -63,7 +58,6 @@ const products = [
         numReviews: 10,
     },
     {
-        _id: "6",
         name: "Stüssy x Nike Air Max 2013",
         image: "/images/stussy_nike_air.jpg",
         description: `Open mesh detailing against hemp canvas overlays keeps you looking and feeling fresh, while iconic Stüssy branding adds more splash than a dip in the pool. Lace-up, there's another hot one coming your way.`,
