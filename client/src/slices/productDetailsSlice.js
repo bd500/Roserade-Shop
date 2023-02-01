@@ -4,7 +4,6 @@ import axios from "axios";
 const fetchSingleProduct = createAsyncThunk(
     "products/fetchProductById",
     async (id) => {
-        console.log(id);
         const {data} = await axios.get(`/api/products/${id}`);
         return data;
     }
