@@ -10,12 +10,13 @@ import {
     ListGroupItem,
 } from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useLocation, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import {addItemToCart, removeItem} from "../slices/cartSlice";
 import Message from "../components/Message";
 
 function CartScreen() {
     const location = useLocation();
+    const navigate = useNavigate();
 
     const product = location.state.product;
     const qtyString = location.state.qty;
@@ -32,7 +33,9 @@ function CartScreen() {
         dispatch(removeItem(id));
     }
 
-    function purchaseHandler() {}
+    function purchaseHandler() {
+        navigate("/login?redirect=shipping");
+    }
 
     return (
         <>
