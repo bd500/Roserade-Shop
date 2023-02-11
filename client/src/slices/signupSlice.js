@@ -15,10 +15,6 @@ const signup = createAsyncThunk("signup", async ({email, password, name}) => {
     return data;
 });
 
-const currentUser = localStorage.getItem("userInfo")
-    ? JSON.parse(localStorage.getItem("userInfo"))
-    : null;
-
 const initialState = {
     loading: false,
     error: "",

@@ -32,7 +32,8 @@ const loginSlice = createSlice({
         logout: (state) => {
             state.userInfo = null;
             console.log(state.userInfo);
-            localStorage.removeItem("userInfo");
+            //localStorage.removeItem("userInfo");
+            localStorage.clear();
         },
     },
     extraReducers: (builder) => {

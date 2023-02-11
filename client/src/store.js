@@ -4,6 +4,7 @@ import reducer from "./slices/productSlice";
 import cartReducer from "./slices/cartSlice";
 import loginReducer from "./slices/loginSlice";
 import signupSlice from "./slices/signupSlice";
+import userDetailsReducer from "./slices/userDetailsSlice";
 
 const rootReducer = {
     productsList: reducer,
@@ -11,6 +12,7 @@ const rootReducer = {
     cart: cartReducer,
     login: loginReducer,
     signup: signupSlice,
+    userDetails: userDetailsReducer,
 };
 
 const store = configureStore({reducer: rootReducer});
