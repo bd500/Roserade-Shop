@@ -5,6 +5,7 @@ import router from "./routes/productRoutes.js";
 import {errorHandler, notFound} from "./middleware/errorMiddleware.js";
 import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", router);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

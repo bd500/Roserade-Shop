@@ -18,15 +18,15 @@ function CartScreen() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const product = location.state.product;
-    const qtyString = location.state.qty;
+    const product = location.state ? location.state.product : null;
+    const qtyString = location.state ? location.state.qty : null;
     const qty = Number(qtyString);
 
     const dispatch = useDispatch();
     const {cartItem} = useSelector((state) => state.cart);
 
     useEffect(() => {
-        dispatch(addItemToCart({product: product, qty: qty}));
+        if (product) dispatch(addItemToCart({product: product, qty: qty}));
     }, [dispatch, product, qty]);
 
     function removeFromCartHandler(id) {
