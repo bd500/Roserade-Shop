@@ -10,8 +10,8 @@ function PlaceOrderScreen() {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
 
-    const itemsPrice = cart.cartItem.reduce(
-        (acc, item) => acc + item.product.price * item.qty,
+    const itemsPrice = cart.cartItems.reduce(
+        (acc, item) => acc + item.price * item.qty,
         0
     );
 
@@ -24,12 +24,12 @@ function PlaceOrderScreen() {
 
     useEffect(() => {
         if (success) navigate(`order/${order._id}`);
-    }, [success, navigate]);
+    }, [success]);
 
     function placeOrderHandler() {
         dispatch(
             createOrder({
-                cartItems: cart.cartItem.product,
+                orderItems: cart.cartItems,
                 shippingAddress: cart.shipping,
                 paymentMethod: cart.payment,
                 itemsPrice: itemsPrice,
@@ -64,34 +64,33 @@ function PlaceOrderScreen() {
                         </ListGroup.Item>
                         <ListGroup>
                             <h2>Order Items</h2>
-                            {cart.cartItem.length === 0 ? (
+                            {cart.cartItems.length === 0 ? (
                                 <Message>Your cart is empty</Message>
                             ) : (
                                 <ListGroup variant="flush">
-                                    {cart.cartItem.map((item, index) => (
+                                    {cart.cartItems.map((item, index) => (
                                         <ListGroup.Item key={index}>
                                             <Row>
                                                 <Col md={1}>
                                                     <Image
-                                                        src={item.product.image}
-                                                        alt={item.product.name}
+                                                        src={item.image}
+                                                        alt={item.name}
                                                         fluid
                                                         rounded
                                                     />
                                                 </Col>
                                                 <Col>
                                                     <Link
-                                                        to={`/product/${item.product._id}`}
+                                                        to={`/product/${item._id}`}
                                                     >
-                                                        {item.product.name}
+                                                        {item.name}
                                                     </Link>
                                                 </Col>
                                                 <Col md={4}>
-                                                    {item.qty} x ${" "}
-                                                    {item.product.price} ={" $"}
+                                                    {item.qty} x $ {item.price}{" "}
+                                                    ={" $"}
                                                     {(
-                                                        item.qty *
-                                                        item.product.price
+                                                        item.qty * item.price
                                                     ).toFixed(2)}
                                                 </Col>
                                             </Row>

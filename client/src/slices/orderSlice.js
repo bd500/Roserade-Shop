@@ -4,7 +4,7 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 const createOrder = createAsyncThunk(
     "createNewOrder",
     async ({
-        cartItems,
+        orderItems,
         shippingAddress,
         paymentMethod,
         itemsPrice,
@@ -20,19 +20,21 @@ const createOrder = createAsyncThunk(
                 Authorization: `Bearer ${currentUser.token}`,
             },
         };
-        const {data} = await axios.post(
-            `/api/users/login`,
-            {
-                cartItems,
-                shippingAddress,
-                paymentMethod,
-                itemsPrice,
-                shippingPrice,
-                taxPrice,
-                totalPrice,
-            },
-            config
-        );
+        const {data} = await axios
+            .post(
+                `/api/orders`,
+                {
+                    orderItems,
+                    shippingAddress,
+                    paymentMethod,
+                    itemsPrice,
+                    taxPrice,
+                    shippingPrice,
+                    totalPrice,
+                },
+                config
+            )
+            .catch((err) => console.log(err));
         return data;
     }
 );

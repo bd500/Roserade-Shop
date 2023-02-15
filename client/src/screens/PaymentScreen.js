@@ -42,8 +42,7 @@ function PaymentScreen() {
                                 onChange={(e) => setPayment(e.target.value)}
                             ></FormCheck.Input>
                             <FormCheck.Label>
-                                <Image src={paypalImg} thumbnail /> Paypal or
-                                Credit Card
+                                <Image src={paypalImg} thumbnail /> Paypal
                             </FormCheck.Label>
                         </Form.Check>
                     </Col>

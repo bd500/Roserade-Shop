@@ -23,10 +23,14 @@ function CartScreen() {
     const qty = Number(qtyString);
 
     const dispatch = useDispatch();
-    const {cartItem} = useSelector((state) => state.cart);
+    const {cartItems} = useSelector((state) => state.cart);
 
     useEffect(() => {
-        if (product) dispatch(addItemToCart({product: product, qty: qty}));
+        if (product) {
+            const {_id, name, image, price} = product;
+            const cartItem = {_id, name, image, price, qty};
+            dispatch(addItemToCart(cartItem));
+        }
     }, [dispatch, product, qty]);
 
     function removeFromCartHandler(id) {
@@ -43,29 +47,27 @@ function CartScreen() {
             <h2>Your Cart</h2>
             <Row>
                 <Col md={8}>
-                    {cartItem.length === 0 ? (
+                    {cartItems.length === 0 ? (
                         <Message>Your cart is empty</Message>
                     ) : (
                         <ListGroup variant="flush">
-                            {cartItem.map((item, index) => (
+                            {cartItems.map((item, index) => (
                                 <ListGroup.Item key={index}>
                                     <Row>
                                         <Col md={2}>
                                             <Image
-                                                src={item.product.image}
+                                                src={item.image}
                                                 fluid
                                                 rounded
                                             />
                                         </Col>
                                         <Col md={4}>
-                                            <Link
-                                                to={`/products/${item.product._id}`}
-                                            >
-                                                {item.product.name}
+                                            <Link to={`/products/${item._id}`}>
+                                                {item.name}
                                             </Link>
                                         </Col>
                                         <Col md={2}>
-                                            $ {item.product.price.toFixed(2)}
+                                            $ {item.price.toFixed(2)}
                                         </Col>
                                         <Col md={2}>{item.qty}</Col>
                                         <Col md={2}>
@@ -74,7 +76,7 @@ function CartScreen() {
                                                 variant="light"
                                                 onClick={removeFromCartHandler.bind(
                                                     this,
-                                                    item.product._id
+                                                    item._id
                                                 )}
                                             >
                                                 <i className="fas fa-trash"></i>
@@ -92,7 +94,7 @@ function CartScreen() {
                             <ListGroupItem>
                                 <h3>
                                     Subtotal{" ("}
-                                    {cartItem.reduce(
+                                    {cartItems.reduce(
                                         (acc, item) => acc + item.qty,
                                         0
                                     )}
@@ -107,12 +109,11 @@ function CartScreen() {
                                     </Col>
                                     <Col md={6}>
                                         <h1>
-                                            {cartItem
+                                            {cartItems
                                                 .reduce(
                                                     (acc, item) =>
                                                         acc +
-                                                        item.qty *
-                                                            item.product.price,
+                                                        item.qty * item.price,
                                                     0
                                                 )
                                                 .toFixed(2)}
@@ -125,7 +126,7 @@ function CartScreen() {
                                     <Button
                                         type="button"
                                         className="btn-block"
-                                        disabled={cartItem.length === 0}
+                                        disabled={cartItems.length === 0}
                                         onClick={purchaseHandler}
                                     >
                                         <i className="fas fa-cash-register ms-6"></i>
