@@ -1,20 +1,24 @@
 import {configureStore} from "@reduxjs/toolkit";
-import productDetailsReducer from "./slices/productDetailsSlice";
 import reducer from "./slices/productSlice";
 import cartReducer from "./slices/cartSlice";
 import loginReducer from "./slices/loginSlice";
 import signupSlice from "./slices/signupSlice";
 import userDetailsReducer from "./slices/userDetailsSlice";
 import orderReducer from "./slices/orderSlice";
+import orderPayReducer from "./slices/orderPaySlice";
+import orderListReducer from "./slices/orderListSlice";
+import usersReducer from "./slices/usersSlice";
 
 const rootReducer = {
     productsList: reducer,
-    productDetails: productDetailsReducer,
     cart: cartReducer,
     login: loginReducer,
     signup: signupSlice,
     userDetails: userDetailsReducer,
     order: orderReducer,
+    orderPay: orderPayReducer,
+    orderList: orderListReducer,
+    users: usersReducer,
 };
 
 const store = configureStore({reducer: rootReducer});

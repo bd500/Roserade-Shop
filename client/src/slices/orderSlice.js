@@ -39,10 +39,27 @@ const createOrder = createAsyncThunk(
     }
 );
 
+const getOrderById = createAsyncThunk("getOrderById", async (id) => {
+    const currentUser = JSON.parse(localStorage.getItem("userInfo"));
+
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
+        },
+    };
+
+    const {data} = await axios
+        .get(`/api/orders/${id}`, config)
+        .catch((err) => console.log(err));
+    return data;
+});
+
 const initialState = {
     success: false,
     order: {},
     error: "",
+    loading: false,
 };
 
 const orderSlice = createSlice({
@@ -54,7 +71,7 @@ const orderSlice = createSlice({
             state.success = false;
         });
         builder.addCase(createOrder.fulfilled, (state, action) => {
-            state.loading = true;
+            state.success = true;
             state.order = action.payload;
             state.error = "";
         });
@@ -62,9 +79,25 @@ const orderSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
         });
+
+        builder.addCase(getOrderById.pending, (state) => {
+            state.loading = true;
+            state.order = {};
+            state.error = "";
+        });
+        builder.addCase(getOrderById.fulfilled, (state, action) => {
+            state.loading = false;
+            state.order = action.payload;
+            state.error = "";
+        });
+        builder.addCase(getOrderById.rejected, (state, action) => {
+            state.loading = false;
+            state.order = {};
+            state.error = action.error;
+        });
     },
 });
 
 const {reducer, action} = orderSlice;
 export default reducer;
-export {createOrder};
+export {createOrder, getOrderById};

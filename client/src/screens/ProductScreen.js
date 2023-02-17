@@ -3,7 +3,7 @@ import {Row, Col, ListGroup, Card, Button, Image, Form} from "react-bootstrap";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import Rating from "../components/Rating";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchSingleProduct} from "../slices/productDetailsSlice";
+import {fetchProductById} from "../slices/productSlice";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
@@ -14,11 +14,11 @@ function ProductScreen() {
 
     const dispatch = useDispatch();
     const {loading, product, error} = useSelector(
-        (state) => state.productDetails
+        (state) => state.productsList
     );
 
     useEffect(() => {
-        dispatch(fetchSingleProduct(id));
+        dispatch(fetchProductById(id));
     }, [dispatch]);
 
     function handleQtyChanged(event) {
@@ -35,7 +35,7 @@ function ProductScreen() {
     return (
         <>
             <Link to={"/"} className="btn btn-light my-3">
-                Go back
+                <i class="fa-solid fa-arrow-left"></i> Go Back
             </Link>
             {loading ? (
                 <Loader />

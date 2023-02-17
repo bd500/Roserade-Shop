@@ -1,11 +1,13 @@
 import React, {useEffect} from "react";
-import {Button, Row, Col, Form} from "react-bootstrap";
+import {Button, Row, Col, Form, Table} from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {updateUser} from "../slices/userDetailsSlice";
 import {useNavigate} from "react-router-dom";
+import {LinkContainer} from "react-router-bootstrap";
+import {getMyOrders} from "../slices/orderListSlice";
 
 function UserScreen() {
     const [email, setEmail] = useState("");
@@ -18,6 +20,7 @@ function UserScreen() {
     const dispatch = useDispatch();
 
     const {loading, error, success} = useSelector((state) => state.userDetails);
+    const orderList = useSelector((state) => state.orderList);
 
     const {userInfo} = useSelector((state) => state.login);
 
@@ -25,6 +28,7 @@ function UserScreen() {
         if (userInfo) {
             setName(userInfo.name);
             setEmail(userInfo.email);
+            dispatch(getMyOrders());
         } else {
             navigate("/login");
         }
@@ -101,6 +105,60 @@ function UserScreen() {
             </Col>
             <Col md={9}>
                 <h1>My Orders</h1>
+                {orderList.loading ? (
+                    <Loader />
+                ) : orderList.error ? (
+                    <Message variant={"danger"}>orderList.error</Message>
+                ) : (
+                    <Table
+                        striped
+                        bordered
+                        hover
+                        responsive
+                        className="table-sm"
+                    >
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>DATE</th>
+                                <th>TOTAL</th>
+                                <th>PAID</th>
+                                <th>DELIVERED</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {orderList.orders.map((order) => (
+                                <tr key={order._id}>
+                                    <td>{order._id}</td>
+                                    <td>{order.createdAt?.substr(0, 10)}</td>
+                                    <td>{order.totalPrice}</td>
+                                    <td>
+                                        {order.isPaid
+                                            ? order.paidAt?.substr(0, 10)
+                                            : "No"}
+                                    </td>
+                                    <td>
+                                        {order.isDelivered
+                                            ? order.deliveredAt?.substr(0, 10)
+                                            : "No"}
+                                    </td>
+                                    <td>
+                                        <LinkContainer
+                                            to={`/order/${order._id}`}
+                                        >
+                                            <Button
+                                                className="btn-sm"
+                                                variant="light"
+                                            >
+                                                Details
+                                            </Button>
+                                        </LinkContainer>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                )}
             </Col>
         </Row>
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Container, Nav, Navbar, NavDropdown, Row, Col} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
 import {useNavigate} from "react-router-dom";
@@ -63,6 +63,40 @@ function Header() {
                                     </Nav.Link>
                                 </LinkContainer>
                             </>
+                        )}
+                        {userInfo && userInfo.isAdmin && (
+                            <NavDropdown title="Edit" id="edit">
+                                <LinkContainer to="/admin/users">
+                                    <NavDropdown.Item>
+                                        <Row>
+                                            <Col md={1}>
+                                                <i class="fa-solid fa-people-group"></i>
+                                            </Col>
+                                            <Col>Users</Col>
+                                        </Row>
+                                    </NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/admin/products">
+                                    <NavDropdown.Item>
+                                        <Row>
+                                            <Col md={1}>
+                                                <i class="fa-solid fa-shirt"></i>
+                                            </Col>
+                                            <Col>Products</Col>
+                                        </Row>
+                                    </NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/admin/orders">
+                                    <NavDropdown.Item>
+                                        <Row>
+                                            <Col md={1}>
+                                                <i class="fa-solid fa-file-invoice-dollar"></i>
+                                            </Col>
+                                            <Col>Orders</Col>
+                                        </Row>
+                                    </NavDropdown.Item>
+                                </LinkContainer>
+                            </NavDropdown>
                         )}
                     </Nav>
                 </Navbar.Collapse>
