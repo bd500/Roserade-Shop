@@ -4,14 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import {deleteUser, getUsersList} from "../slices/usersSlice";
 import {useNavigate} from "react-router-dom";
+import {getAllOrders} from "../slices/orderListSlice";
 
-function UsersListScreen() {
+function OrdersListScreen() {
     const dispatch = useDispatch();
-    const {loading, users, error, deleted} = useSelector(
-        (state) => state.users
-    );
+    const {loading, orders, error} = useSelector((state) => state.orderList);
 
     const navigate = useNavigate();
 
@@ -19,20 +17,15 @@ function UsersListScreen() {
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            dispatch(getUsersList());
+            dispatch(getAllOrders());
         } else {
             navigate("/");
         }
-    }, [dispatch, deleted, navigate]);
-
-    function deleteHandler(id) {
-        if (window.confirm("Do you want to delete this user?"))
-            dispatch(deleteUser(id));
-    }
+    }, [dispatch, navigate]);
 
     return (
         <>
-            <h1>Users</h1>
+            <h1>Orders</h1>
             {loading ? (
                 <Loader />
             ) : error ? (
@@ -42,23 +35,32 @@ function UsersListScreen() {
                     <thead style={{textAlign: "center"}}>
                         <tr>
                             <th>ID</th>
-                            <th>NAME</th>
-                            <th>EMAIL</th>
-                            <th>ADMIN</th>
+                            <th>USER</th>
+                            <th>DATE</th>
+                            <th>TOTAL</th>
+                            <th>PAID</th>
+                            <th>DELIVERED</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user) => (
-                            <tr key={user._id}>
-                                <td>{user._id}</td>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
+                        {orders.map((order) => (
+                            <tr key={order._id}>
+                                <td>{order._id}</td>
+                                <td>{order.user.name}</td>
+                                <td>{order.createdAt.substring(0, 10)}</td>
                                 <td align="center">
-                                    {user.isAdmin ? (
+                                    {order.isPaid ? (
+                                        order.paidAt.substring(0, 10)
+                                    ) : (
                                         <i
-                                            class="fa-solid fa-circle-check"
-                                            style={{color: "green"}}
+                                            class="fa-solid fa-circle-xmark"
+                                            style={{color: "#D9544D"}}
                                         ></i>
+                                    )}
+                                </td>
+                                <td align="center">
+                                    {order.isDelivered ? (
+                                        order.deliveredAt.substring(0, 10)
                                     ) : (
                                         <i
                                             class="fa-solid fa-circle-xmark"
@@ -68,24 +70,15 @@ function UsersListScreen() {
                                 </td>
                                 <td>
                                     <LinkContainer
-                                        to={`/admin/user/${user._id}`}
+                                        to={`/admin/order/${order._id}`}
                                     >
                                         <Button
                                             className="btn-sm"
                                             variant="light"
                                         >
-                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            Details
                                         </Button>
                                     </LinkContainer>
-                                </td>
-                                <td>
-                                    <Button
-                                        className="btn-sm"
-                                        variant="danger"
-                                        onClick={() => deleteHandler(user._id)}
-                                    >
-                                        <i class="fa-solid fa-trash"></i>
-                                    </Button>
                                 </td>
                             </tr>
                         ))}
@@ -96,4 +89,4 @@ function UsersListScreen() {
     );
 }
 
-export default UsersListScreen;
+export default OrdersListScreen;

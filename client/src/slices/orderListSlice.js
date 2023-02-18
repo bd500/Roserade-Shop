@@ -1,9 +1,9 @@
 import axios from "axios";
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
-const getMyOrders = createAsyncThunk("getMyOrders,", async () => {
-    const currentUser = JSON.parse(localStorage.getItem("userInfo"));
+const currentUser = JSON.parse(localStorage.getItem("userInfo"));
 
+const getMyOrders = createAsyncThunk("getMyOrders,", async () => {
     const config = {
         headers: {
             "Content-Type": "application/json",
@@ -12,6 +12,18 @@ const getMyOrders = createAsyncThunk("getMyOrders,", async () => {
     };
 
     const {data} = await axios.get(`/api/orders/myorders`, config);
+    return data;
+});
+
+const getAllOrders = createAsyncThunk("getAllOrders,", async () => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
+        },
+    };
+
+    const {data} = await axios.get(`/api/orders`, config);
     return data;
 });
 
@@ -37,9 +49,23 @@ const orderListSlice = createSlice({
             state.loading = false;
             state.error = action.error;
         });
+
+        //For Admin
+        //get all orders
+        builder.addCase(getAllOrders.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(getAllOrders.fulfilled, (state, action) => {
+            state.loading = false;
+            state.orders = action.payload;
+        });
+        builder.addCase(getAllOrders.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+        });
     },
 });
 
 const {reducer} = orderListSlice;
 export default reducer;
-export {getMyOrders};
+export {getMyOrders, getAllOrders};

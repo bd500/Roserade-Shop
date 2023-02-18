@@ -15,7 +15,9 @@ function PlaceOrderScreen() {
         0
     );
 
-    const shippingPrice = itemsPrice > 100 ? 0 : 100;
+    console.log(itemsPrice);
+
+    const shippingPrice = itemsPrice > 100 ? 100 : 0;
     const taxPrice = Math.round((0.1 * itemsPrice * 100) / 100);
     const totalPrice = taxPrice + itemsPrice;
 

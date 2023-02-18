@@ -23,7 +23,7 @@ function ProductListScreen() {
         } else {
             navigate("/");
         }
-    }, [dispatch, deleted]);
+    }, [dispatch, deleted, navigate]);
 
     function deleteHandler(id) {
         dispatch(deleteProduct(id));

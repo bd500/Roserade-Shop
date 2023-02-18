@@ -70,4 +70,35 @@ const getMyOrders = asyncHandler(async (req, res) => {
     }
 });
 
-export {createOrder, getOrderById, updateOrderToPaid, getMyOrders};
+//PRIVATE ROUTES
+//Access Admin
+const getAllOrders = asyncHandler(async (req, res) => {
+    const orders = await Order.find({}).populate("user", "id name");
+    if (orders) res.json(orders);
+    else {
+        throw new Error("Orders not found!");
+    }
+});
+
+const updateOrderToDelivered = asyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+        order.isDelivered = true;
+        order.deliveredAt = Date.now();
+
+        const updateOrder = await order.save();
+        res.json(updateOrder);
+    } else {
+        res.status(404);
+        throw new Error("Order not found.");
+    }
+});
+
+export {
+    createOrder,
+    getOrderById,
+    updateOrderToPaid,
+    getMyOrders,
+    getAllOrders,
+    updateOrderToDelivered,
+};

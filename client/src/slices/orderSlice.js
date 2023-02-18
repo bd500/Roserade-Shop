@@ -1,6 +1,8 @@
 import axios from "axios";
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
+const currentUser = JSON.parse(localStorage.getItem("userInfo"));
+
 const createOrder = createAsyncThunk(
     "createNewOrder",
     async ({
@@ -12,8 +14,6 @@ const createOrder = createAsyncThunk(
         taxPrice,
         totalPrice,
     }) => {
-        const currentUser = JSON.parse(localStorage.getItem("userInfo"));
-
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -40,8 +40,6 @@ const createOrder = createAsyncThunk(
 );
 
 const getOrderById = createAsyncThunk("getOrderById", async (id) => {
-    const currentUser = JSON.parse(localStorage.getItem("userInfo"));
-
     const config = {
         headers: {
             "Content-Type": "application/json",
@@ -55,6 +53,23 @@ const getOrderById = createAsyncThunk("getOrderById", async (id) => {
     return data;
 });
 
+//admin routes
+const updateOrderToDelivered = createAsyncThunk(
+    "updateOrderToDelivered",
+    async (id) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${currentUser.token}`,
+            },
+        };
+        const {data} = await axios
+            .put(`/api/orders/${id}/deliver`, {}, config)
+            .catch((err) => console.log(err));
+        return data;
+    }
+);
+
 const initialState = {
     success: false,
     order: {},
@@ -67,6 +82,8 @@ const orderSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
+        //public
+        //create order
         builder.addCase(createOrder.pending, (state) => {
             state.success = false;
         });
@@ -80,6 +97,7 @@ const orderSlice = createSlice({
             state.error = action.error.message;
         });
 
+        //get order by id
         builder.addCase(getOrderById.pending, (state) => {
             state.loading = true;
             state.order = {};
@@ -95,9 +113,26 @@ const orderSlice = createSlice({
             state.order = {};
             state.error = action.error;
         });
+
+        //admin only
+        //update order to delivered
+        builder.addCase(updateOrderToDelivered.pending, (state) => {
+            state.loading = true;
+            state.success = false;
+        });
+        builder.addCase(updateOrderToDelivered.fulfilled, (state, action) => {
+            state.loading = false;
+            state.order = action.payload;
+            state.success = true;
+        });
+        builder.addCase(updateOrderToDelivered.rejected, (state, action) => {
+            state.loading = false;
+            state.order = {};
+            state.error = action.error;
+        });
     },
 });
 
 const {reducer, action} = orderSlice;
 export default reducer;
-export {createOrder, getOrderById};
+export {createOrder, getOrderById, updateOrderToDelivered};

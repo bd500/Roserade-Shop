@@ -1,58 +1,37 @@
 import React, {useEffect, useState} from "react";
-import {Row, Col, ListGroup, Card, Image} from "react-bootstrap";
+import {Row, Col, ListGroup, Card, Image, Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import {getOrderById} from "../slices/orderSlice";
 import {Link} from "react-router-dom";
-import axios from "axios";
-import {PayPalButton} from "react-paypal-button-v2";
-import {updateOrderToPaid} from "../slices/orderPaySlice";
+import {getOrderById, updateOrderToDelivered} from "../slices/orderSlice";
 
-function OrderScreen() {
+function OrderUpdateScreen() {
     const dispatch = useDispatch();
     const {order, error, loading} = useSelector((state) => state.order);
-    const orderPay = useSelector((state) => state.orderPay);
 
     const {id} = useParams();
-
-    const [sdkReady, setSdkReady] = useState(false);
-
-    const successPaymentHandler = (paymentResult) => {
-        dispatch(updateOrderToPaid({id, paymentResult}));
-    };
+    const navigate = useNavigate();
 
     const itemPrice = order.orderItems?.reduce(
         (acc, item) => acc + item.price * item.qty,
         0
     );
 
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
     useEffect(() => {
-        dispatch(getOrderById(id));
-
-        const addPayPalScript = async () => {
-            const {data: clientId} = await axios.get("/api/config/paypal");
-            const script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-            script.async = true;
-            script.onload = () => {
-                setSdkReady(true);
-            };
-            document.body.appendChild(script);
-        };
-
-        if (!order || orderPay.success) {
+        if (userInfo && userInfo.isAdmin) {
             dispatch(getOrderById(id));
-        } else if (!order.isPaid) {
-            if (!window.paypal) {
-                addPayPalScript();
-            } else {
-                setSdkReady(true);
-            }
+        } else {
+            navigate("/");
         }
-    }, [dispatch, orderPay.success]);
+    }, [dispatch]);
+
+    function markAsDeliveredHandler() {
+        dispatch(updateOrderToDelivered(id));
+    }
 
     return loading ? (
         <Loader />
@@ -81,7 +60,8 @@ function OrderScreen() {
                             </p>
                             {order.isDelivered ? (
                                 <Message variant={"success"}>
-                                    Your order has been delivered.
+                                    Delivered at{" "}
+                                    {order.deliveredAt.substring(0, 10)}
                                 </Message>
                             ) : (
                                 <Message variant={"danger"}>
@@ -170,16 +150,18 @@ function OrderScreen() {
                                     <Col>${order.totalPrice?.toFixed(2)}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            <ListGroup>
-                                {!sdkReady ? (
-                                    <Loader />
-                                ) : (
-                                    <PayPalButton
-                                        amount={order.totalPrice}
-                                        onSuccess={successPaymentHandler}
-                                    />
-                                )}
-                            </ListGroup>
+                            {!order.isDelivered && (
+                                <ListGroup.Item>
+                                    <Row>
+                                        <Button
+                                            className="btn btn-dark"
+                                            onClick={markAsDeliveredHandler}
+                                        >
+                                            Mark as delivered
+                                        </Button>
+                                    </Row>
+                                </ListGroup.Item>
+                            )}
                         </ListGroup>
                     </Card>
                 </Col>
@@ -188,4 +170,4 @@ function OrderScreen() {
     );
 }
 
-export default OrderScreen;
+export default OrderUpdateScreen;
