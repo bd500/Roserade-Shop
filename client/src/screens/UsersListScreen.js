@@ -21,7 +21,7 @@ function UsersListScreen() {
         if (userInfo && userInfo.isAdmin) {
             dispatch(getUsersList());
         } else {
-            navigate("/");
+            navigate("/404");
         }
     }, [dispatch, deleted, navigate]);
 

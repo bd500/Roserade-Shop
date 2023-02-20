@@ -20,6 +20,7 @@ import CreateProductScreen from "./screens/CreateProductScreen";
 import EditProductScreen from "./screens/EditProductScreen";
 import OrdersListScreen from "./screens/OrdersListScreen";
 import OrderUpdateScreen from "./screens/OrderUpdate";
+import ErrorScreen from "./screens/ErrorScreen";
 
 function App() {
     return (
@@ -29,6 +30,19 @@ function App() {
                 <Container>
                     <Routes>
                         <Route path="/" element={<HomeScreen />} exact />
+                        <Route
+                            path="/search/:keyword"
+                            element={<HomeScreen />}
+                        />
+                        <Route
+                            path="/page/:pageNumber"
+                            element={<HomeScreen />}
+                        />
+                        <Route
+                            path="/search/:keyword/:pageNumber"
+                            element={<HomeScreen />}
+                        />
+
                         <Route
                             path="/products/:id"
                             element={<ProductScreen />}
@@ -62,6 +76,10 @@ function App() {
                             element={<ProductListScreen />}
                         />
                         <Route
+                            path="/admin/products/:pageNumber"
+                            element={<ProductListScreen />}
+                        />
+                        <Route
                             path="/admin/product/create"
                             element={<CreateProductScreen />}
                         />
@@ -77,6 +95,9 @@ function App() {
                             path="/admin/order/:id"
                             element={<OrderUpdateScreen />}
                         />
+
+                        {/**** Error route */}
+                        <Route path="/404" element={<ErrorScreen />} />
                     </Routes>
                 </Container>
             </main>

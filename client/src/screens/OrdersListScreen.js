@@ -19,7 +19,7 @@ function OrdersListScreen() {
         if (userInfo && userInfo.isAdmin) {
             dispatch(getAllOrders());
         } else {
-            navigate("/");
+            navigate("/404");
         }
     }, [dispatch, navigate]);
 

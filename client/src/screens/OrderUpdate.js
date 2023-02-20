@@ -25,7 +25,7 @@ function OrderUpdateScreen() {
         if (userInfo && userInfo.isAdmin) {
             dispatch(getOrderById(id));
         } else {
-            navigate("/");
+            navigate("/404");
         }
     }, [dispatch]);
 

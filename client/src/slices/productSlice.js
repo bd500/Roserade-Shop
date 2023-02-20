@@ -5,9 +5,9 @@ const currentUser = JSON.parse(localStorage.getItem("userInfo"));
 
 const fetchProducts = createAsyncThunk(
     "products/fetchAllProducts",
-    async () => {
+    async ({keyword = "", pageNumber = ""}) => {
         const {data} = await axios
-            .get(`/api/products`)
+            .get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`)
             .catch((err) => console.log(err.message));
         return data;
     }
@@ -21,6 +21,36 @@ const fetchProductById = createAsyncThunk(
     }
 );
 
+const fetchTopProducts = createAsyncThunk(
+    "products/fetchTopProducts",
+    async () => {
+        const {data} = await axios
+            .get(`/api/products/top`)
+            .catch((err) => console.log(err.message));
+        return data;
+    }
+);
+
+const createProductReview = createAsyncThunk(
+    "products/createProductReview",
+    async ({id, rating, comment}) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${currentUser.token}`,
+            },
+        };
+
+        const {data} = await axios.post(
+            `/api/products/${id}/review`,
+            {rating, comment},
+            config
+        );
+        return data;
+    }
+);
+
+//ADMIN ONLY
 const deleteProduct = createAsyncThunk("product/deleteProduct", async (id) => {
     const config = {
         headers: {
@@ -107,10 +137,14 @@ const updateProduct = createAsyncThunk(
 const initialState = {
     loading: false,
     products: [],
+    topProducts: [],
     error: "",
     deleted: false,
     updated: false,
     product: {},
+    success: false,
+    page: 0,
+    pages: 0,
 };
 
 const productSlice = createSlice({
@@ -125,7 +159,9 @@ const productSlice = createSlice({
         });
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.loading = false;
-            state.products = action.payload;
+            state.products = action.payload.products;
+            state.page = action.payload.page;
+            state.pages = action.payload.pages;
             state.error = "";
         });
         builder.addCase(fetchProducts.rejected, (state, action) => {
@@ -135,7 +171,6 @@ const productSlice = createSlice({
         //get product by id
         builder.addCase(fetchProductById.pending, (state) => {
             state.loading = true;
-            console.log(state);
         });
         builder.addCase(fetchProductById.fulfilled, (state, action) => {
             state.loading = false;
@@ -144,6 +179,30 @@ const productSlice = createSlice({
         });
         builder.addCase(fetchProductById.rejected, (state, action) => {
             state.loading = false;
+            state.error = action.error.message;
+        });
+        //get top rated products
+        builder.addCase(fetchTopProducts.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(fetchTopProducts.fulfilled, (state, action) => {
+            state.loading = false;
+            state.topProducts = action.payload;
+            state.error = "";
+        });
+        builder.addCase(fetchTopProducts.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+        //create review for a product
+        builder.addCase(createProductReview.pending, (state) => {
+            state.success = false;
+        });
+        builder.addCase(createProductReview.fulfilled, (state) => {
+            state.success = true;
+        });
+        builder.addCase(createProductReview.rejected, (state, action) => {
+            state.success = false;
             state.error = action.error.message;
         });
 
@@ -193,8 +252,10 @@ const {reducer, action} = productSlice;
 export default reducer;
 export {
     fetchProducts,
+    fetchTopProducts,
     deleteProduct,
     createProduct,
     fetchProductById,
     updateProduct,
+    createProductReview,
 };
