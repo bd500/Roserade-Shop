@@ -14,7 +14,7 @@ function ProductsCarousel() {
 
     return (
         <>
-            <h1 className="mb-3">Top rated this week</h1>
+            <h1 className="my-3">Top rated this week</h1>
             <Carousel variant="dark">
                 {topProducts.map((p) => (
                     <Carousel.Item key={p._id}>

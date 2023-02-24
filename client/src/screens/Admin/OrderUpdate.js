@@ -2,10 +2,10 @@ import React, {useEffect, useState} from "react";
 import {Row, Col, ListGroup, Card, Image, Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+import Loader from "../../components/Loader";
+import Message from "../../components/Message";
 import {Link} from "react-router-dom";
-import {getOrderById, updateOrderToDelivered} from "../slices/orderSlice";
+import {getOrderById, updateOrderToDelivered} from "../../slices/orderSlice";
 
 function OrderUpdateScreen() {
     const dispatch = useDispatch();

@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {createProductReview, fetchProductById} from "../slices/productSlice";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import Meta from "../components/Meta";
 
 function ProductScreen() {
     const {id} = useParams();
@@ -44,6 +45,7 @@ function ProductScreen() {
 
     return (
         <>
+            <Meta title={product.name} />
             <Link to={"/"} className="btn btn-light my-3">
                 <i class="fa-solid fa-arrow-left"></i> Go Back
             </Link>

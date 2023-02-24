@@ -31,8 +31,6 @@ const loginSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.userInfo = null;
-            console.log(state.userInfo);
-            //localStorage.removeItem("userInfo");
             localStorage.clear();
         },
     },

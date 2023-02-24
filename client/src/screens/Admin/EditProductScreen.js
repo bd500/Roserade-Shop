@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import {Form, Button, Container} from "react-bootstrap";
+import {Form, Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import FormContainer from "../components/FormContainer";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import {fetchProductById} from "../slices/productSlice";
-import {updateProduct} from "../slices/productSlice";
+import FormContainer from "../../components/FormContainer";
+import Loader from "../../components/Loader";
+import Message from "../../components/Message";
+import {fetchProductById} from "../../slices/productSlice";
+import {updateProduct} from "../../slices/productSlice";
+import Meta from "../../components/Meta";
 
 function EditProductScreen() {
     const dispatch = useDispatch();
@@ -88,6 +89,7 @@ function EditProductScreen() {
 
     return (
         <>
+            <Meta title="Edit product" />
             <Link to={"/admin/products"} className="btn btn-light my-3">
                 <i class="fa-solid fa-arrow-left"></i> Go Back
             </Link>
@@ -148,7 +150,7 @@ function EditProductScreen() {
                             ></Form.Control>
                         </Form.Group>
                         <Form.Group controlId="description">
-                            <Form.Label>Name</Form.Label>
+                            <Form.Label>Description</Form.Label>
                             <Form.Control
                                 placeholder="Enter description"
                                 value={description}

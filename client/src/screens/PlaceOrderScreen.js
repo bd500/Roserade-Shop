@@ -5,6 +5,7 @@ import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 import {useDispatch, useSelector} from "react-redux";
 import {createOrder} from "../slices/orderSlice";
+import Meta from "../components/Meta";
 
 function PlaceOrderScreen() {
     const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function PlaceOrderScreen() {
 
     return (
         <>
+            <Meta title="Place Order" />
             <CheckoutSteps step1 step2 step3 step4 />
             {error && <Message variant="danger">{error}</Message>}
             <Row>

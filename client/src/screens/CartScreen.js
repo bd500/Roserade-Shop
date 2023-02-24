@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import {addItemToCart, removeItem} from "../slices/cartSlice";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
 
 function CartScreen() {
     const location = useLocation();
@@ -43,7 +44,7 @@ function CartScreen() {
 
     return (
         <>
-            {" "}
+            <Meta title="Your cart" />
             <h2>Your Cart</h2>
             <Row>
                 <Col md={8}>

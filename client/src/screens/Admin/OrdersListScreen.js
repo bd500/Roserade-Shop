@@ -2,10 +2,11 @@ import React, {useEffect} from "react";
 import {Button, Table} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+import Loader from "../../components/Loader";
+import Message from "../../components/Message";
 import {useNavigate} from "react-router-dom";
-import {getAllOrders} from "../slices/orderListSlice";
+import {getAllOrders} from "../../slices/orderListSlice";
+import Meta from "../../components/Meta";
 
 function OrdersListScreen() {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function OrdersListScreen() {
 
     return (
         <>
+            <Meta title="All orders" />
             <h1>Orders</h1>
             {loading ? (
                 <Loader />

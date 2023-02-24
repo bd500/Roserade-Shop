@@ -13,13 +13,13 @@ import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
-import UsersListScreen from "./screens/UsersListScreen";
-import EditUserScreen from "./screens/EditUserScreen";
-import ProductListScreen from "./screens/ProductListScreen";
-import CreateProductScreen from "./screens/CreateProductScreen";
-import EditProductScreen from "./screens/EditProductScreen";
-import OrdersListScreen from "./screens/OrdersListScreen";
-import OrderUpdateScreen from "./screens/OrderUpdate";
+import UsersListScreen from "./screens/Admin/UsersListScreen";
+import EditUserScreen from "./screens/Admin/EditUserScreen";
+import ProductListScreen from "./screens/Admin/ProductListScreen";
+import CreateProductScreen from "./screens/Admin/CreateProductScreen";
+import EditProductScreen from "./screens/Admin/EditProductScreen";
+import OrdersListScreen from "./screens/Admin/OrdersListScreen";
+import OrderUpdateScreen from "./screens/Admin/OrderUpdate";
 import ErrorScreen from "./screens/ErrorScreen";
 
 function App() {
@@ -97,7 +97,7 @@ function App() {
                         />
 
                         {/**** Error route */}
-                        <Route path="/404" element={<ErrorScreen />} />
+                        <Route path="*" element={<ErrorScreen />} />
                     </Routes>
                 </Container>
             </main>

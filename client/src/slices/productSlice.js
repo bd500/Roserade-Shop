@@ -81,19 +81,21 @@ const createProduct = createAsyncThunk(
             },
         };
 
-        const {data} = await axios.post(
-            `/api/products`,
-            {
-                name,
-                price,
-                description,
-                image,
-                brand,
-                category,
-                countInStock,
-            },
-            config
-        );
+        const {data} = await axios
+            .post(
+                `/api/products`,
+                {
+                    name,
+                    price,
+                    description,
+                    image,
+                    brand,
+                    category,
+                    countInStock,
+                },
+                config
+            )
+            .catch((err) => console.log(err));
         return data;
     }
 );
@@ -224,9 +226,11 @@ const productSlice = createSlice({
         //create product
         builder.addCase(createProduct.pending, (state) => {
             state.loading = true;
+            state.success = false;
         });
         builder.addCase(createProduct.fulfilled, (state) => {
             state.loading = false;
+            state.success = true;
         });
         builder.addCase(createProduct.rejected, (state, action) => {
             state.loading = false;

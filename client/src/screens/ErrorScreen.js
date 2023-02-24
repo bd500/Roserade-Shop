@@ -1,10 +1,12 @@
 import React from "react";
 import {Button, Row} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
+import Meta from "../components/Meta";
 
 function ErrorScreen() {
     return (
         <>
+            <Meta title="Not found" />
             <div className="text-center">
                 <h1>404 Error</h1>
                 <p>Sorry, we can't find the page you are looking for.</p>
