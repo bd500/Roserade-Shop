@@ -1,5 +1,7 @@
 import asyncHandler from "express-async-handler";
-import Order from "../models/orderModel.js";
+import Order from "../models/order.model.js";
+
+const pageSize = 20;
 
 const createOrder = asyncHandler(async (req, res) => {
     const {
@@ -63,7 +65,12 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 });
 
 const getMyOrders = asyncHandler(async (req, res) => {
-    const order = await Order.find({user: req.user._id});
+    const page = Number(req.query.pageNumber) || 1;
+
+    const order = await Order.find({user: req.user._id})
+        .limit(pageSize)
+        .skip(pageSize * (page - 1));
+
     if (order) res.json(order);
     else {
         throw new Error("Order not found!");
@@ -73,7 +80,13 @@ const getMyOrders = asyncHandler(async (req, res) => {
 //PRIVATE ROUTES
 //Access Admin
 const getAllOrders = asyncHandler(async (req, res) => {
-    const orders = await Order.find({}).populate("user", "id name");
+    const page = Number(req.query.pageNumber) || 1;
+
+    const orders = await Order.find({})
+        .populate("user", "id name")
+        .limit(pageSize)
+        .skip(pageSize * (page - 1));
+
     if (orders) res.json(orders);
     else {
         throw new Error("Orders not found!");

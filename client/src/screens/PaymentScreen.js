@@ -50,6 +50,19 @@ function PaymentScreen() {
                             </Form.Check>
                         </Col>
                         <Col>
+                            <Form.Check type="radio" id="card">
+                                <FormCheck.Input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="Card"
+                                    onChange={(e) => setPayment(e.target.value)}
+                                ></FormCheck.Input>
+                                <FormCheck.Label>
+                                    <Image src={kidneyImg} thumbnail /> Card
+                                </FormCheck.Label>
+                            </Form.Check>
+                        </Col>
+                        <Col>
                             <Form.Check type="radio" id="kidney">
                                 <FormCheck.Input
                                     type="radio"

@@ -8,8 +8,8 @@ import {
     registerUser,
     updatePrivateUser,
     updateUser,
-} from "../controllers/userController.js";
-import {protect, admin} from "../middleware/authMiddleware.js";
+} from "../controllers/user.controller.js";
+import {protect, admin} from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 

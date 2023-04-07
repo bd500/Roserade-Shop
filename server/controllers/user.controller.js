@@ -1,6 +1,8 @@
 import asyncHandler from "express-async-handler";
-import User from "../models/userModel.js";
+import User from "../models/user.model.js";
 import generateToken from "../utils/generateToken.js";
+
+const pageSize = 20;
 
 const authUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
@@ -97,7 +99,11 @@ const updateUser = asyncHandler(async (req, res) => {
 //@ACESS: Admin
 
 const getAllUsers = asyncHandler(async (req, res) => {
-    const user = await User.find({});
+    const page = Number(req.query.pageNumber) || 1;
+
+    const user = await User.find({})
+        .limit(pageSize)
+        .skip(pageSize * (page - 1));
 
     if (user) {
         res.json(user);

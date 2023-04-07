@@ -1,12 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-import router from "./routes/productRoutes.js";
-import {errorHandler, notFound} from "./middleware/errorMiddleware.js";
+import router from "./routes/product.route.js";
+import {errorHandler, notFound} from "./middleware/error.middleware.js";
 import cors from "cors";
-import userRoutes from "./routes/userRoutes.js";
-import orderRoutes from "./routes/orderRoutes.js";
-import uploadRoutes from "./routes/uploadRoutes.js";
+import userRoutes from "./routes/user.route.js";
+import orderRoutes from "./routes/order.route.js";
+import uploadRoutes from "./routes/upload.route.js";
 import path from "path";
 
 const app = express();

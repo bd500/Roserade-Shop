@@ -73,6 +73,10 @@ const productSchema = mongoose.Schema(
             default: 0,
         },
         reviews: [reviewSchema],
+        url: {
+            type: String,
+            require: false,
+        },
     },
     {
         timestamps: true,
