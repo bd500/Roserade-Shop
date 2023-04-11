@@ -8,7 +8,7 @@ const signup = createAsyncThunk("signup", async ({email, password, name}) => {
         },
     };
     const {data} = await axios.post(
-        "/api/users/register",
+        "/api/auth/register",
         {email, password, name},
         config
     );

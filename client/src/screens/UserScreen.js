@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Button, Row, Col, Form, Table} from "react-bootstrap";
+import {Button, Row, Col, Form, Table, Image} from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import {useState} from "react";
@@ -65,6 +65,14 @@ function UserScreen() {
                         </Message>
                     )}
                     <Form onSubmit={submitHandler}>
+                        <Form.Group className="text-center ">
+                            <Image
+                                src={userInfo.avatar}
+                                roundedCircle
+                                className="avatar mt-1 mb-4"
+                            />
+                        </Form.Group>
+                        <h5>It's all about you baby!!</h5>
                         <Form.Group controlId="email">
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
@@ -83,6 +91,7 @@ function UserScreen() {
                                 onChange={(e) => setName(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
+                        <h5>Change Password</h5>
                         <Form.Group controlId="password">
                             <Form.Label>Password</Form.Label>
                             <Form.Control

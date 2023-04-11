@@ -3,23 +3,39 @@ import slugify from "slugify";
 const category = [
     {
         name: "Coat",
-        url: "coat",
+        slug: "coat",
     },
     {
         name: "Dresses",
-        url: slugify("Dresses"),
+        slug: slugify("Dresses"),
     },
     {
         name: "Sweater",
-        url: slugify("Sweater"),
+        slug: slugify("Sweater"),
     },
     {
         name: "Hat",
-        url: slugify("Hat"),
+        slug: slugify("Hat"),
     },
     {
         name: "Sneakers",
-        url: slugify("Sneakers"),
+        slug: slugify("Sneakers"),
+    },
+    {
+        name: "Jeans",
+        slug: "jeans",
+    },
+    {
+        name: "Shirt",
+        slug: "shirt",
+    },
+    {
+        name: "Jackets",
+        slug: "jackets",
+    },
+    {
+        name: "Skirts",
+        slug: "skirts",
     },
 ];
 

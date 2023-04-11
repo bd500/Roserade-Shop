@@ -157,6 +157,10 @@ function EditProductScreen() {
                                 onChange={(e) => setDescription(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Sizes</Form.Label>
+                            <p>None</p>
+                        </Form.Group>
                         <Button type="submit" className="my-3">
                             Update
                         </Button>

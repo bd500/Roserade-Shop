@@ -73,9 +73,14 @@ const productSchema = mongoose.Schema(
             default: 0,
         },
         reviews: [reviewSchema],
-        url: {
+        slug: {
             type: String,
             require: false,
+        },
+        sizes: {
+            type: Object,
+            require: true,
+            default: null,
         },
     },
     {

@@ -7,6 +7,7 @@ import cors from "cors";
 import userRoutes from "./routes/user.route.js";
 import orderRoutes from "./routes/order.route.js";
 import uploadRoutes from "./routes/upload.route.js";
+import authRoutes from "./routes/auth.route.js";
 import path from "path";
 
 const app = express();
@@ -27,6 +28,7 @@ app.get("/api/config/paypal", (req, res) =>
     res.send(process.env.PAYPAL_CLIENT_ID)
 );
 
+app.use("/api/auth", authRoutes);
 app.use("/api/products", router);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);

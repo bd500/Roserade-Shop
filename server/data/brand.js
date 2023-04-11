@@ -3,23 +3,43 @@ import slugify from "slugify";
 const brand = [
     {
         name: "SÉZANE",
-        url: "sezane",
+        slug: "sezane",
     },
     {
         name: "Rebecca Taylor",
-        url: slugify("Rebecca Taylor"),
+        slug: slugify("Rebecca Taylor"),
     },
     {
         name: "CarHarrt",
-        url: slugify("CarHarrt"),
+        slug: slugify("CarHarrt"),
     },
     {
         name: "Freepeople",
-        url: slugify("Freepeople"),
+        slug: slugify("Free People"),
     },
     {
         name: "Nike",
-        url: slugify("Nike"),
+        slug: slugify("Nike"),
+    },
+    {
+        name: "Sunflower",
+        slug: "sunflower",
+    },
+    {
+        name: "Levi's",
+        slug: "levis",
+    },
+    {
+        name: "Gap",
+        slug: "gap",
+    },
+    {
+        name: "North Face",
+        slug: "north-face",
+    },
+    {
+        name: "Madewell",
+        slug: "madewell",
     },
 ];
 

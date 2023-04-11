@@ -5,7 +5,7 @@ const categorySchema = mongoose.Schema({
         type: String,
         require: true,
     },
-    url: {
+    slug: {
         type: String,
         require: true,
     },

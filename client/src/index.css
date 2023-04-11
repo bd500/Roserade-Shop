@@ -1,6 +1,14 @@
-main{
+main {
     min-height: 90vh;
 }
-a{
+a {
     text-decoration: none;
+}
+
+.avatar {
+    width: 100px;
+}
+
+.avatar-icon {
+    width: 40px;
 }

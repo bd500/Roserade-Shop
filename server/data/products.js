@@ -10,6 +10,12 @@ const products = [
         countInStock: 10,
         rating: 4.5,
         numReviews: 12,
+        slug: "carl-coat",
+        sizes: {
+            S: 10,
+            M: 5,
+            L: 3,
+        },
     },
     {
         name: "Mod Fleur Shirt Dress",
@@ -21,6 +27,14 @@ const products = [
         countInStock: 7,
         rating: 4.0,
         numReviews: 8,
+        slug: "mod-fleur-shirt-dress",
+        sizes: {
+            XS: 5,
+            S: 10,
+            M: 5,
+            L: 3,
+            XL: 2,
+        },
     },
     {
         name: "Lya Sweater",
@@ -32,6 +46,11 @@ const products = [
         countInStock: 5,
         rating: 3,
         numReviews: 12,
+        slug: "lya-sweater",
+        sizes: {
+            M: 5,
+            L: 3,
+        },
     },
     {
         name: "Fleece 2-in-1 Hat",
@@ -44,18 +63,23 @@ const products = [
         countInStock: 11,
         rating: 5,
         numReviews: 12,
+        slug: "fleece-2-in-1-hat",
     },
     {
         name: "Hit The Slopes Sequin Jacket",
         image: "/images/sequin_jacket.jpg",
         description:
             "Your favorite fuzzy fleece now featured in a sequin-adorned design with a button-up front and classic zippered pockets.",
-        brand: "Freepeople",
+        brand: "Free People",
         category: "Jackets",
         price: 49.99,
         countInStock: 7,
         rating: 3.5,
         numReviews: 10,
+        slug: "hit-the-slopes-sequin-jacket",
+        sizes: {
+            M: 5,
+        },
     },
     {
         name: "Stüssy x Nike Air Max 2013",
@@ -67,6 +91,96 @@ const products = [
         countInStock: 0,
         rating: 4,
         numReviews: 12,
+        slug: "stussy-nike-air-max-2013",
+    },
+    {
+        name: "Floral Maxi Dress",
+        slug: "floral-maxi-dress",
+        image: "https://example.com/images/floral-maxi-dress.jpg",
+        description:
+            "Embrace the floral trend with this stunning maxi dress. Featuring a flowing skirt and adjustable straps, it's perfect for a summer day out.",
+        brand: "Sunflower",
+        category: "Dresses",
+        price: 59.99,
+        countInStock: 25,
+        rating: 4.5,
+        numReviews: 12,
+        sizes: {
+            S: 10,
+            M: 5,
+        },
+    },
+    {
+        name: "High Waisted Skinny Jeans",
+        slug: "high-waisted-skinny-jeans",
+        image: "https://example.com/images/high-waisted-skinny-jeans.jpg",
+        description:
+            "These skinny jeans hug your curves in all the right places, thanks to their high-waisted design. Made from stretchy denim, they're comfortable enough for all-day wear.",
+        brand: "Levi's",
+        category: "Jeans",
+        price: 79.99,
+        countInStock: 50,
+        rating: 4.2,
+        numReviews: 24,
+        sizes: {
+            S: 10,
+            M: 5,
+            L: 3,
+        },
+    },
+    {
+        name: "Striped Button-Down Shirt",
+        slug: "striped-button-down-shirt",
+        image: "https://example.com/images/striped-button-down-shirt.jpg",
+        description:
+            "This classic button-down shirt features a timeless stripe pattern and a relaxed fit. Dress it up with slacks or down with jeans for a versatile look.",
+        brand: "Gap",
+        category: "Shirts",
+        price: 39.99,
+        countInStock: 35,
+        rating: 4.0,
+        numReviews: 18,
+        sizes: {
+            XS: 5,
+            S: 10,
+            M: 5,
+            L: 3,
+        },
+    },
+    {
+        name: "Quilted Jacket",
+        slug: "quilted-jacket",
+        image: "https://example.com/images/quilted-jacket.jpg",
+        description:
+            "Stay warm and stylish with this quilted jacket. Featuring a zip-up front and cozy lining, it's perfect for chilly days.",
+        brand: "North Face",
+        category: "Jackets",
+        price: 129.99,
+        countInStock: 10,
+        rating: 4.8,
+        numReviews: 6,
+        sizes: {
+            M: 5,
+            L: 3,
+            XL: 2,
+        },
+    },
+    {
+        name: "Wrap Skirt",
+        slug: "wrap-skirt",
+        image: "https://example.com/images/wrap-skirt.jpg",
+        description:
+            "This elegant wrap skirt features a flattering A-line silhouette and a chic tie at the waist. Dress it up with heels or down with sneakers for a versatile look.",
+        brand: "Madewell",
+        category: "Skirts",
+        price: 49.99,
+        countInStock: 20,
+        rating: 4.3,
+        numReviews: 9,
+        sizes: {
+            S: 10,
+            M: 5,
+        },
     },
 ];
 

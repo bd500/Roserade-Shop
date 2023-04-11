@@ -7,11 +7,7 @@ const loginUser = createAsyncThunk("loginUser", async ({email, password}) => {
             "Content-Types": "application/json",
         },
     };
-    const {data} = await axios.post(
-        `/api/users/login`,
-        {email, password},
-        config
-    );
+    const {data} = await axios.post(`/api/auth`, {email, password}, config);
     return data;
 });
 

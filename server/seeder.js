@@ -28,7 +28,7 @@ async function importData() {
         const createdUsers = await User.insertMany(users);
         const adminUser = createdUsers[0]._id;
 
-        // const createdBrand = await Brand.insertMany(brand);
+        //  await Brand.insertMany(brand);
         // const brandId = createdBrand[0];
 
         // const createdCategory = await Category.insertMany(category);

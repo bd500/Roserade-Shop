@@ -1,5 +1,13 @@
 import React from "react";
-import {Container, Nav, Navbar, NavDropdown, Row, Col} from "react-bootstrap";
+import {
+    Container,
+    Nav,
+    Navbar,
+    NavDropdown,
+    Row,
+    Col,
+    Image,
+} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
 import {Routes, useNavigate} from "react-router-dom";
@@ -34,14 +42,23 @@ function Header() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <SearchBox />
-                    <Nav className="ms-auto">
+                    <Nav className="ms-auto align-items-center">
                         <LinkContainer to={"/cart"}>
                             <Nav.Link>
                                 <i class="fa-solid fa-cart-shopping"></i> Cart
                             </Nav.Link>
                         </LinkContainer>
                         {userInfo ? (
-                            <NavDropdown title={userInfo.name} id="username">
+                            <NavDropdown
+                                title={
+                                    <Image
+                                        src={userInfo.avatar}
+                                        className="avatar-icon nav-brand"
+                                        roundedCircle
+                                    />
+                                }
+                                id="username"
+                            >
                                 <LinkContainer to="/profile">
                                     <NavDropdown.Item>
                                         <i class="fa-solid fa-user"></i> Profile
@@ -68,7 +85,7 @@ function Header() {
                             </>
                         )}
                         {userInfo && userInfo.isAdmin && (
-                            <NavDropdown title="Edit" id="edit">
+                            <NavDropdown title="Admin" id="admin">
                                 <LinkContainer to="/admin/users">
                                     <NavDropdown.Item>
                                         <Row>
