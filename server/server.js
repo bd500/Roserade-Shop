@@ -8,6 +8,10 @@ import userRoutes from "./routes/user.route.js";
 import orderRoutes from "./routes/order.route.js";
 import uploadRoutes from "./routes/upload.route.js";
 import authRoutes from "./routes/auth.route.js";
+import paymentRoutes from "./routes/payment.route.js";
+import brandRoutes from "./routes/brand.route.js";
+import categoryRoutes from "./routes/category.route.js";
+import cartRoutes from "./routes/cart.route.js";
 import path from "path";
 
 const app = express();
@@ -24,15 +28,15 @@ app.get("/", (req, res) => {
     res.send("API is running...");
 });
 
-app.get("/api/config/paypal", (req, res) =>
-    res.send(process.env.PAYPAL_CLIENT_ID)
-);
-
 app.use("/api/auth", authRoutes);
 app.use("/api/products", router);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/brands", brandRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/cart", cartRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/payment", paymentRoutes);
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

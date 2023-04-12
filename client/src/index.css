@@ -12,3 +12,8 @@ a {
 .avatar-icon {
     width: 40px;
 }
+
+.header-form {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}

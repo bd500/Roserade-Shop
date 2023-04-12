@@ -7,6 +7,7 @@ import {
     Row,
     Col,
     Image,
+    Badge,
 } from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
@@ -45,7 +46,9 @@ function Header() {
                     <Nav className="ms-auto align-items-center">
                         <LinkContainer to={"/cart"}>
                             <Nav.Link>
-                                <i class="fa-solid fa-cart-shopping"></i> Cart
+                                <i class="fa-solid fa-cart-shopping">
+                                    <Badge pill>0</Badge>
+                                </i>{" "}
                             </Nav.Link>
                         </LinkContainer>
                         {userInfo ? (
@@ -85,7 +88,19 @@ function Header() {
                             </>
                         )}
                         {userInfo && userInfo.isAdmin && (
-                            <NavDropdown title="Admin" id="admin">
+                            <NavDropdown title={"Admin"} id="admin">
+                                <LinkContainer to="/admin/dashboard">
+                                    <NavDropdown.Item>
+                                        <Row>
+                                            <Col md={1}>
+                                                <i class="fa-solid fa-chart-simple" />
+                                            </Col>
+                                            <Col>Dashboard</Col>
+                                        </Row>
+                                    </NavDropdown.Item>
+                                </LinkContainer>
+                                <NavDropdown.Divider />
+
                                 <LinkContainer to="/admin/users">
                                     <NavDropdown.Item>
                                         <Row>

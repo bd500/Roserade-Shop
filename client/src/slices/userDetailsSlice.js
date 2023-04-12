@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 const updateUser = createAsyncThunk(
     "users/profile",
-    async ({id, name, email, password}) => {
+    async ({id, name, email, password, avatar}) => {
         const currentUser = JSON.parse(localStorage.getItem("userInfo"));
 
         const config = {
@@ -19,6 +19,7 @@ const updateUser = createAsyncThunk(
                 name,
                 email,
                 password,
+                avatar,
             },
             config
         );

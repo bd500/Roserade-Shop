@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Button, Row, Col, Form, Table, Image} from "react-bootstrap";
+import {Button, Row, Col, Form, Table, Image, Stack} from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import {useState} from "react";
@@ -9,6 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {LinkContainer} from "react-router-bootstrap";
 import {getMyOrders} from "../slices/orderListSlice";
 import Meta from "../components/Meta";
+import axios from "axios";
 
 function UserScreen() {
     const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ function UserScreen() {
     const [password, setPassword] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
     const [message, setMessage] = useState();
+    const [avatar, setAvatar] = useState("");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -29,6 +31,7 @@ function UserScreen() {
         if (userInfo) {
             setName(userInfo.name);
             setEmail(userInfo.email);
+            setAvatar(userInfo.avatar);
             dispatch(getMyOrders());
         } else {
             navigate("/login");
@@ -45,8 +48,29 @@ function UserScreen() {
                     email: email,
                     password: password,
                     name: name,
+                    avatar,
                 })
             );
+        }
+    }
+
+    async function uploadFileHandler(e) {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append("image", file);
+
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            };
+
+            const {data} = await axios.post("/api/upload", formData, config);
+
+            setAvatar(data);
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -54,7 +78,7 @@ function UserScreen() {
         <>
             <Meta title={userInfo.name} />
             <Row>
-                <Col md={3}>
+                <Col md={4}>
                     <h1>My Profile</h1>
                     {loading && <Loader />}
                     {error && <Message variant={"danger"}>{error}</Message>}
@@ -65,14 +89,23 @@ function UserScreen() {
                         </Message>
                     )}
                     <Form onSubmit={submitHandler}>
-                        <Form.Group className="text-center ">
-                            <Image
-                                src={userInfo.avatar}
-                                roundedCircle
-                                className="avatar mt-1 mb-4"
-                            />
+                        <Form.Group controlId="avatar">
+                            <Stack direction="horizontal" gap={1}>
+                                <Image
+                                    src={avatar}
+                                    roundedCircle
+                                    className="avatar "
+                                />
+                                <Form.Control
+                                    type="file"
+                                    size="sm"
+                                    onChange={uploadFileHandler}
+                                />
+                            </Stack>
                         </Form.Group>
-                        <h5>It's all about you baby!!</h5>
+                        <h5 className="header-form">
+                            It's all about you baby!!
+                        </h5>
                         <Form.Group controlId="email">
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
@@ -91,7 +124,7 @@ function UserScreen() {
                                 onChange={(e) => setName(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
-                        <h5>Change Password</h5>
+                        <h5 className="header-form">Change Password</h5>
                         <Form.Group controlId="password">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
@@ -115,7 +148,7 @@ function UserScreen() {
                         </Button>
                     </Form>
                 </Col>
-                <Col md={9}>
+                <Col md={8}>
                     <h1>My Orders</h1>
                     {orderList.loading ? (
                         <Loader />
