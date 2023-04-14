@@ -3,21 +3,20 @@ import React, {useEffect, useState} from "react";
 import {Form, Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import FormContainer from "../../components/FormContainer";
-import Loader from "../../components/Loader";
-import Message from "../../components/Message";
-import {fetchProductById} from "../../slices/productSlice";
-import {updateProduct} from "../../slices/productSlice";
-import Meta from "../../components/Meta";
+import FormContainer from "../../../components/FormContainer";
+import Loader from "../../../components/Loader";
+import Message from "../../../components/Message";
+import Meta from "../../../components/Meta";
+import {createProduct} from "../../../slices/productSlice";
 
-function EditProductScreen() {
+function CreateProductScreen() {
     const dispatch = useDispatch();
-    const {product, loading, error, updated} = useSelector(
+    const {loading, error, success} = useSelector(
         (state) => state.productsList
     );
 
     const navigate = useNavigate();
-    const {id} = useParams();
+    // const {id} = useParams();
 
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -32,36 +31,26 @@ function EditProductScreen() {
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            if (!product.name || product._id !== id) {
-                dispatch(fetchProductById(id));
-            } else {
-                setName(product.name);
-                setPrice(product.price);
-                setImage(product.image);
-                setBrand(product.brand);
-                setCategory(product.category);
-                setDescription(product.description);
-                setCountInStock(product.countInStock);
-            }
+            //do something
         } else {
-            navigate("/");
+            navigate("/404");
         }
-    }, [dispatch, product, updated]);
+    }, []);
 
     function submitHandler(e) {
         e.preventDefault();
-        dispatch(
-            updateProduct({
-                id,
-                name,
-                price,
-                description,
-                image,
-                brand,
-                category,
-                countInStock,
-            })
-        );
+        if (imageUploaded)
+            dispatch(
+                createProduct({
+                    name,
+                    price,
+                    description,
+                    image,
+                    brand,
+                    category,
+                    countInStock,
+                })
+            );
     }
 
     async function uploadFileHandler(e) {
@@ -89,14 +78,14 @@ function EditProductScreen() {
 
     return (
         <>
-            <Meta title="Edit product" />
-            <Link to={"/admin/products"} className="btn btn-light my-3">
-                <i class="fa-solid fa-arrow-left"></i> Go Back
+            <Meta title="Add New Product" />
+            <Link to={"/admin/products"} className="btn btn-light">
+                <i class="fa-solid fa-arrow-left"></i> Go back to product
             </Link>
             <FormContainer>
-                <h1>Edit Product</h1>
-                {updated && (
-                    <Message variant={"success"}>Product Updated</Message>
+                <h1>Add Product</h1>
+                {success && (
+                    <Message variant={"success"}>Product Added</Message>
                 )}
                 {loading ? (
                     <Loader />
@@ -157,12 +146,8 @@ function EditProductScreen() {
                                 onChange={(e) => setDescription(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Sizes</Form.Label>
-                            <p>None</p>
-                        </Form.Group>
                         <Button type="submit" className="my-3">
-                            Update
+                            Add
                         </Button>
                     </Form>
                 )}
@@ -171,4 +156,4 @@ function EditProductScreen() {
     );
 }
 
-export default EditProductScreen;
+export default CreateProductScreen;

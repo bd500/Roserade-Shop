@@ -2,11 +2,11 @@ import React, {useEffect, useState} from "react";
 import {Form, Button, Container} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import FormContainer from "../../components/FormContainer";
-import Loader from "../../components/Loader";
-import Message from "../../components/Message";
-import Meta from "../../components/Meta";
-import {getUserById, updatePrivateUser} from "../../slices/usersSlice";
+import FormContainer from "../../../components/FormContainer";
+import Loader from "../../../components/Loader";
+import Message from "../../../components/Message";
+import Meta from "../../../components/Meta";
+import {getUserById, updatePrivateUser} from "../../../slices/usersSlice";
 
 function EditUserScreen() {
     const [email, setEmail] = useState("");
@@ -49,7 +49,7 @@ function EditUserScreen() {
 
     return (
         <Container>
-            <Meta title="Edit user" />
+            <Meta title="Edit User" />
             <Link to={"/admin/users"} className="btn btn-light my-3">
                 <i class="fa-solid fa-arrow-left"></i> Go Back
             </Link>

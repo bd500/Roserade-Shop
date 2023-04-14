@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {Row, Col, ListGroup, Card, Button, Image, Form} from "react-bootstrap";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import Rating from "../components/Rating";
+import Rating from "../../components/Rating";
 import {useDispatch, useSelector} from "react-redux";
-import {createProductReview, fetchProductById} from "../slices/productSlice";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import Meta from "../components/Meta";
+import {createProductReview, fetchProductById} from "../../slices/productSlice";
+import Message from "../../components/Message";
+import Loader from "../../components/Loader";
+import Meta from "../../components/Meta";
 
 function ProductScreen() {
     const {id} = useParams();

@@ -3,15 +3,16 @@ import React, {useEffect, useState} from "react";
 import {Form, Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import FormContainer from "../../components/FormContainer";
-import Loader from "../../components/Loader";
-import Message from "../../components/Message";
-import Meta from "../../components/Meta";
-import {createProduct} from "../../slices/productSlice";
+import FormContainer from "../../../components/FormContainer";
+import Loader from "../../../components/Loader";
+import Message from "../../../components/Message";
+import {fetchProductById} from "../../../slices/productSlice";
+import {updateProduct} from "../../../slices/productSlice";
+import Meta from "../../../components/Meta";
 
-function CreateProductScreen() {
+function EditProductScreen() {
     const dispatch = useDispatch();
-    const {product, loading, error, success} = useSelector(
+    const {product, loading, error, updated} = useSelector(
         (state) => state.productsList
     );
 
@@ -31,16 +32,27 @@ function CreateProductScreen() {
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            //do something
+            if (!product.name || product._id !== id) {
+                dispatch(fetchProductById(id));
+            } else {
+                setName(product.name);
+                setPrice(product.price);
+                setImage(product.image);
+                setBrand(product.brand);
+                setCategory(product.category);
+                setDescription(product.description);
+                setCountInStock(product.countInStock);
+            }
         } else {
-            navigate("/404");
+            navigate("/");
         }
-    }, []);
+    }, [dispatch, product, updated]);
 
     function submitHandler(e) {
         e.preventDefault();
         dispatch(
-            createProduct({
+            updateProduct({
+                id,
                 name,
                 price,
                 description,
@@ -77,14 +89,14 @@ function CreateProductScreen() {
 
     return (
         <>
-            <Meta title="Add new product" />
-            <Link to={"/admin/products"} className="btn btn-light">
-                <i class="fa-solid fa-arrow-left"></i> Go back
+            <Meta title="Edit Product" />
+            <Link to={"/admin/products"} className="btn btn-light my-3">
+                <i class="fa-solid fa-arrow-left"></i> Go Back To Products
             </Link>
             <FormContainer>
-                <h1>Add Product</h1>
-                {success && (
-                    <Message variant={"success"}>Product Added</Message>
+                <h1>Edit Product</h1>
+                {updated && (
+                    <Message variant={"success"}>Product Updated</Message>
                 )}
                 {loading ? (
                     <Loader />
@@ -145,8 +157,12 @@ function CreateProductScreen() {
                                 onChange={(e) => setDescription(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Sizes</Form.Label>
+                            <p>None</p>
+                        </Form.Group>
                         <Button type="submit" className="my-3">
-                            Add
+                            Update
                         </Button>
                     </Form>
                 )}
@@ -155,4 +171,4 @@ function CreateProductScreen() {
     );
 }
 
-export default CreateProductScreen;
+export default EditProductScreen;

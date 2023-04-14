@@ -2,13 +2,13 @@ import React, {useEffect} from "react";
 import {Button, Table, Image, Row, Col} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
-import Loader from "../../components/Loader";
-import Message from "../../components/Message";
+import Loader from "../../../components/Loader";
+import Message from "../../../components/Message";
 import {useNavigate} from "react-router-dom";
-import {deleteProduct, fetchProducts} from "../../slices/productSlice";
-import Paginate from "../../components/Paginate";
+import {deleteProduct, fetchProducts} from "../../../slices/productSlice";
+import Paginate from "../../../components/Paginate";
 import {useParams} from "react-router-dom";
-import Meta from "../../components/Meta";
+import Meta from "../../../components/Meta";
 
 function ProductListScreen() {
     const dispatch = useDispatch();
@@ -35,7 +35,7 @@ function ProductListScreen() {
 
     return (
         <>
-            <Meta title="All products" />
+            <Meta title="All Products" />
             <Row className="align-items-center">
                 <Col>
                     <h1>Products</h1>

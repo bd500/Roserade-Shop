@@ -2,10 +2,10 @@ import React, {useEffect, useState} from "react";
 import {Row, Button, Form, Col} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import FormContainer from "../components/FormContainer";
-import {loginUser} from "../slices/loginSlice";
-import Message from "../components/Message";
-import Meta from "../components/Meta";
+import FormContainer from "../../components/FormContainer";
+import {loginUser} from "../../slices/loginSlice";
+import Message from "../../components/Message";
+import Meta from "../../components/Meta";
 
 function LoginScreen() {
     const location = useLocation();

@@ -20,6 +20,7 @@ function Header() {
     const {userInfo} = useSelector((state) => state.login);
 
     const navigate = useNavigate();
+    const cartItems = localStorage.getItem("cartItems") || [];
 
     function logoutHandler() {
         dispatch(logout());
@@ -39,15 +40,17 @@ function Header() {
                 <LinkContainer to={"/"}>
                     <Navbar.Brand>Roserade Shop</Navbar.Brand>
                 </LinkContainer>
-
+                <Nav className="me-auto">
+                    <Nav.Item>Discover</Nav.Item>
+                </Nav>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <SearchBox />
                     <Nav className="ms-auto align-items-center">
+                        <SearchBox />
                         <LinkContainer to={"/cart"}>
                             <Nav.Link>
-                                <i class="fa-solid fa-cart-shopping">
-                                    <Badge pill>0</Badge>
+                                <i class="fa-solid fa-cart-shopping ">
+                                    <Badge pill>{cartItems.length}</Badge>
                                 </i>{" "}
                             </Nav.Link>
                         </LinkContainer>
@@ -118,6 +121,26 @@ function Header() {
                                                 <i class="fa-solid fa-shirt"></i>
                                             </Col>
                                             <Col>Products</Col>
+                                        </Row>
+                                    </NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/admin/brands">
+                                    <NavDropdown.Item>
+                                        <Row>
+                                            <Col md={1}>
+                                                <i class="fa-solid fa-flag"></i>
+                                            </Col>
+                                            <Col>Brands</Col>
+                                        </Row>
+                                    </NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/admin/categories">
+                                    <NavDropdown.Item>
+                                        <Row>
+                                            <Col md={1}>
+                                                <i class="fa-solid fa-bag-shopping"></i>
+                                            </Col>
+                                            <Col>Categories</Col>
                                         </Row>
                                     </NavDropdown.Item>
                                 </LinkContainer>

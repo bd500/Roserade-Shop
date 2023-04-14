@@ -2,10 +2,10 @@ import React, {useEffect, useState} from "react";
 import {Form, Button, Row, Col} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import FormContainer from "../components/FormContainer";
-import Message from "../components/Message";
-import Meta from "../components/Meta";
-import {signup} from "../slices/signupSlice";
+import FormContainer from "../../components/FormContainer";
+import Message from "../../components/Message";
+import Meta from "../../components/Meta";
+import {signup} from "../../slices/signupSlice";
 
 function SignupScreen() {
     const [email, setEmail] = useState("");
@@ -32,7 +32,7 @@ function SignupScreen() {
 
     function submitHandler(e) {
         e.preventDefault();
-        if (password != confirmPass) setMessage("Passwords do not match!");
+        if (password !== confirmPass) setMessage("Passwords do not match!");
         else dispatch(signup({email, password, name}));
     }
 

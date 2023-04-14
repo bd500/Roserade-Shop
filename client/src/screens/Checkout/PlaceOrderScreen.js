@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import {Button, Row, Col, ListGroup, Image, Card} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import Message from "../components/Message";
-import CheckoutSteps from "../components/CheckoutSteps";
+import Message from "../../components/Message";
+import CheckoutSteps from "../../components/CheckoutSteps";
 import {useDispatch, useSelector} from "react-redux";
-import {createOrder} from "../slices/orderSlice";
-import Meta from "../components/Meta";
+import {createOrder} from "../../slices/orderSlice";
+import Meta from "../../components/Meta";
 
 function PlaceOrderScreen() {
     const dispatch = useDispatch();

@@ -33,7 +33,15 @@ function HomeScreen() {
                     <Message variant="danger">{productsList.error}</Message>
                 ) : (
                     <>
-                        <Image src="/images/banner.png" fluid alt="banner" />
+                        {!keyword ? (
+                            <Image
+                                src="/images/banner.png"
+                                fluid
+                                alt="banner"
+                            />
+                        ) : (
+                            <h1>Search Result for "{keyword}"</h1>
+                        )}
                         {!keyword && <ProductsCarousel />}
                         {!keyword && <h2 className="mt-3">Latest products</h2>}
                         {productsList.products.map((product) => (

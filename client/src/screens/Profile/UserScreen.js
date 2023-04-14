@@ -1,14 +1,14 @@
 import React, {useEffect} from "react";
 import {Button, Row, Col, Form, Table, Image, Stack} from "react-bootstrap";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
+import Message from "../../components/Message";
+import Loader from "../../components/Loader";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {updateUser} from "../slices/userDetailsSlice";
+import {updateUser} from "../../slices/userDetailsSlice";
 import {useNavigate} from "react-router-dom";
 import {LinkContainer} from "react-router-bootstrap";
-import {getMyOrders} from "../slices/orderListSlice";
-import Meta from "../components/Meta";
+import {getMyOrders} from "../../slices/orderListSlice";
+import Meta from "../../components/Meta";
 import axios from "axios";
 
 function UserScreen() {

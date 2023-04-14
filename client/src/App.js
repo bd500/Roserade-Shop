@@ -4,23 +4,29 @@ import Header from "./components/Header";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {Container} from "react-bootstrap";
 import HomeScreen from "./screens/HomeScreen";
-import ProductScreen from "./screens/ProductScreen";
-import CartScreen from "./screens/CartScreen";
-import LoginScreen from "./screens/LoginScreen";
-import SignupScreen from "./screens/SignupScreen";
-import UserScreen from "./screens/UserScreen";
-import ShippingScreen from "./screens/ShippingScreen";
-import PaymentScreen from "./screens/PaymentScreen";
-import PlaceOrderScreen from "./screens/PlaceOrderScreen";
-import OrderScreen from "./screens/OrderScreen";
-import UsersListScreen from "./screens/Admin/UsersListScreen";
-import EditUserScreen from "./screens/Admin/EditUserScreen";
-import ProductListScreen from "./screens/Admin/ProductListScreen";
-import CreateProductScreen from "./screens/Admin/CreateProductScreen";
-import EditProductScreen from "./screens/Admin/EditProductScreen";
-import OrdersListScreen from "./screens/Admin/OrdersListScreen";
-import OrderUpdateScreen from "./screens/Admin/OrderUpdate";
+import ProductScreen from "./screens/Product/ProductScreen";
+import CartScreen from "./screens/Cart/CartScreen";
+import LoginScreen from "./screens/Login/LoginScreen";
+import SignupScreen from "./screens/SignUp/SignupScreen";
+import UserScreen from "./screens/Profile/UserScreen";
+import ShippingScreen from "./screens/Checkout/ShippingScreen";
+import PaymentScreen from "./screens/Checkout/PaymentScreen";
+import PlaceOrderScreen from "./screens/Checkout/PlaceOrderScreen";
+import OrderScreen from "./screens/Order/OrderScreen";
+import UsersListScreen from "./screens/Admin/User/UsersListScreen";
+import EditUserScreen from "./screens/Admin/User/EditUserScreen";
+import ProductListScreen from "./screens/Admin/Product/ProductListScreen";
+import CreateProductScreen from "./screens/Admin/Product/CreateProductScreen";
+import EditProductScreen from "./screens/Admin/Product/EditProductScreen";
+import OrdersListScreen from "./screens/Admin/Order/OrdersListScreen";
+import OrderUpdateScreen from "./screens/Admin/Order/OrderUpdate";
 import ErrorScreen from "./screens/ErrorScreen";
+import CreateBrandScreen from "./screens/Admin/Brand/CreateBrandScreen";
+import BrandListScreen from "./screens/Admin/Brand/BrandListScreen";
+import EditBrandScreen from "./screens/Admin/Brand/EditBrandScreen";
+import CreateCategoryScreen from "./screens/Admin/Category/CreateCategoryScreen";
+import CategoryListScreen from "./screens/Admin/Category/CategoryListScreen";
+import EditCategoryScreen from "./screens/Admin/Category/EditCategoryScreen";
 
 function App() {
     return (
@@ -94,6 +100,34 @@ function App() {
                         <Route
                             path="/admin/order/:id"
                             element={<OrderUpdateScreen />}
+                        />
+
+                        {/**** Brand */}
+                        <Route
+                            path="/admin/brands/create"
+                            element={<CreateBrandScreen />}
+                        />
+                        <Route
+                            path="/admin/brands"
+                            element={<BrandListScreen />}
+                        />
+                        <Route
+                            path="/admin/brands/:id"
+                            element={<EditBrandScreen />}
+                        />
+
+                        {/**** Cateogry */}
+                        <Route
+                            path="/admin/categories/create"
+                            element={<CreateCategoryScreen />}
+                        />
+                        <Route
+                            path="/admin/categories"
+                            element={<CategoryListScreen />}
+                        />
+                        <Route
+                            path="/admin/categories/:id"
+                            element={<EditCategoryScreen />}
                         />
 
                         {/**** Error route */}

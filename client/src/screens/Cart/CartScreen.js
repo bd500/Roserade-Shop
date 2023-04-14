@@ -11,9 +11,9 @@ import {
 } from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
-import {addItemToCart, removeItem} from "../slices/cartSlice";
-import Message from "../components/Message";
-import Meta from "../components/Meta";
+import {addItemToCart, removeItem} from "../../slices/cartSlice";
+import Message from "../../components/Message";
+import Meta from "../../components/Meta";
 
 function CartScreen() {
     const location = useLocation();
@@ -44,7 +44,7 @@ function CartScreen() {
 
     return (
         <>
-            <Meta title="Your cart" />
+            <Meta title="Your Cart" />
             <h2>Your Cart</h2>
             <Row>
                 <Col md={8}>
@@ -105,7 +105,7 @@ function CartScreen() {
                             </ListGroupItem>
                             <ListGroup.Item>
                                 <Row>
-                                    <Col md={6}>
+                                    <Col md={6} style={{textAlign: "right"}}>
                                         <h1>$</h1>
                                     </Col>
                                     <Col md={6}>

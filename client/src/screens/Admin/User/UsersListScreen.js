@@ -2,11 +2,11 @@ import React, {useEffect} from "react";
 import {Button, Table} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
-import Loader from "../../components/Loader";
-import Message from "../../components/Message";
-import {deleteUser, getUsersList} from "../../slices/usersSlice";
+import Loader from "../../../components/Loader";
+import Message from "../../../components/Message";
+import {deleteUser, getUsersList} from "../../../slices/usersSlice";
 import {useNavigate} from "react-router-dom";
-import Meta from "../../components/Meta";
+import Meta from "../../../components/Meta";
 
 function UsersListScreen() {
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function UsersListScreen() {
 
     return (
         <>
-            <Meta title="All users" />
+            <Meta title="All Users" />
             <h1>Users</h1>
             {loading ? (
                 <Loader />

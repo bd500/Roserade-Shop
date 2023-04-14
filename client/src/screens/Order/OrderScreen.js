@@ -2,13 +2,13 @@ import React, {useEffect, useState} from "react";
 import {Row, Col, ListGroup, Card, Image} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import {getOrderById} from "../slices/orderSlice";
+import Loader from "../../components/Loader";
+import Message from "../../components/Message";
+import {getOrderById} from "../../slices/orderSlice";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {PayPalButton} from "react-paypal-button-v2";
-import {updateOrderToPaid} from "../slices/orderPaySlice";
+import {updateOrderToPaid} from "../../slices/orderPaySlice";
 
 function OrderScreen() {
     const dispatch = useDispatch();

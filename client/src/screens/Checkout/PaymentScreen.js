@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import {Button, Row, Col, Form, FormCheck, Image} from "react-bootstrap";
-import FormContainer from "../components/FormContainer";
+import FormContainer from "../../components/FormContainer";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import CheckoutSteps from "../components/CheckoutSteps";
-import {savePaymentMethod} from "../slices/cartSlice";
-import Meta from "../components/Meta";
+import CheckoutSteps from "../../components/CheckoutSteps";
+import {savePaymentMethod} from "../../slices/cartSlice";
+import Meta from "../../components/Meta";
 
 const paypalImg = "/images/payments/paypal.png";
 const kidneyImg = "/images/payments/kidney.png";

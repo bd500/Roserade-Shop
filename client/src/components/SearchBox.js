@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Form} from "react-bootstrap";
+import {Form, InputGroup, OverlayTrigger, Popover} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 
 function SearchBox() {
@@ -15,18 +15,38 @@ function SearchBox() {
         }
     }
 
+    const popover = (
+        <Popover id="popover-contained">
+            <Popover.Body>
+                <Form onSubmit={submitHandler}>
+                    <InputGroup>
+                        <Form.Control
+                            type="text"
+                            name="q"
+                            onChange={(e) => setKeyword(e.target.value)}
+                            placeholder="Search product..."
+                            size="sm"
+                        ></Form.Control>
+                    </InputGroup>
+                </Form>
+            </Popover.Body>
+        </Popover>
+    );
+
     return (
-        <Form onSubmit={submitHandler}>
-            <Form.Group>
-                <Form.Control
-                    type="text"
-                    name="q"
-                    onChange={(e) => setKeyword(e.target.value)}
-                    placeholder="Search product..."
-                    className="ms-5 me-2"
-                ></Form.Control>
-            </Form.Group>
-        </Form>
+        <OverlayTrigger
+            trigger={"click"}
+            placement="bottom"
+            overlay={popover}
+            container={this}
+        >
+            <a className="me-3" role="button">
+                <i
+                    class="fa-solid fa-magnifying-glass"
+                    style={{color: "#fff"}}
+                ></i>
+            </a>
+        </OverlayTrigger>
     );
 }
 

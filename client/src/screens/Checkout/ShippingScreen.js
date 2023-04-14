@@ -1,12 +1,12 @@
 import React from "react";
 import {Button, Row, Col, Form} from "react-bootstrap";
-import FormContainer from "../components/FormContainer";
+import FormContainer from "../../components/FormContainer";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {saveShippingAddress} from "../slices/cartSlice";
-import CheckoutSteps from "../components/CheckoutSteps";
-import Meta from "../components/Meta";
+import {saveShippingAddress} from "../../slices/cartSlice";
+import CheckoutSteps from "../../components/CheckoutSteps";
+import Meta from "../../components/Meta";
 
 function ShippingScreen() {
     const dispatch = useDispatch();
