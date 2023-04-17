@@ -8,6 +8,8 @@ import orderReducer from "./slices/orderSlice";
 import orderPayReducer from "./slices/orderPaySlice";
 import orderListReducer from "./slices/orderListSlice";
 import usersReducer from "./slices/usersSlice";
+import brandSlice from "./slices/brandSlice";
+import categorySlice from "./slices/categorySlice";
 
 const rootReducer = {
     productsList: reducer,
@@ -19,6 +21,8 @@ const rootReducer = {
     orderPay: orderPayReducer,
     orderList: orderListReducer,
     users: usersReducer,
+    brands: brandSlice,
+    categories: categorySlice,
 };
 
 const store = configureStore({reducer: rootReducer});

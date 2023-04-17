@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Category from "../models/category.model.js";
+import slugify from "slugify";
 
 const getAllCategory = asyncHandler(async (req, res) => {
     const category = await Category.find();
@@ -32,7 +33,7 @@ const createCategory = asyncHandler(async (req, res) => {
     const slug = slugify(name);
 
     const existedCat = await Category.find({name: name});
-    if (existedCat) {
+    if (existedCat.length > 0) {
         res.status(400);
         throw new Error("This category already existed");
     }

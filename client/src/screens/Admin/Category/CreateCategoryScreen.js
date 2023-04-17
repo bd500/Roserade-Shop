@@ -1,13 +1,31 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Meta from "../../../components/Meta";
 import FormContainer from "../../../components/FormContainer";
 import Message from "../../../components/Message";
 import {Button, Form} from "react-bootstrap";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {addCategory} from "../../../slices/categorySlice";
+import Loader from "../../../components/Loader";
 
 const CreateCategoryScreen = () => {
     const [name, setName] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
+    const {loading, error, success} = useSelector((state) => state.categories);
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+    useEffect(() => {
+        if (userInfo.token) {
+            //show
+        } else navigate("/404");
+    }, [dispatch, navigate]);
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        dispatch(addCategory(name));
+    };
     return (
         <>
             <Meta title="Add New Cateogry"></Meta>
@@ -16,9 +34,12 @@ const CreateCategoryScreen = () => {
             </Link>
             <FormContainer>
                 <h1>Add new Category</h1>
-                <Message variant={"success"}>Category Added </Message>
-                {/* <Message variant={"dangerous"}></Message> */}
-                <Form>
+                {success && (
+                    <Message variant={"success"}>Category Added </Message>
+                )}
+                {error && <Message variant={"danger"}>{error}</Message>}
+                {loading && <Loader />}
+                <Form onSubmit={onSubmitHandler}>
                     <Form.Group controlId="name">
                         <Form.Label>Name</Form.Label>
                         <Form.Control

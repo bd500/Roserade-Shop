@@ -1,12 +1,31 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Meta from "../../../components/Meta";
 import FormContainer from "../../../components/FormContainer";
 import Message from "../../../components/Message";
 import {Button, Form} from "react-bootstrap";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import Loader from "../../../components/Loader";
+import {addBrand} from "../../../slices/brandSlice";
 
 const CreateBrandScreen = () => {
     const [name, setName] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const {loading, success, error} = useSelector((state) => state.brands);
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        dispatch(addBrand(name));
+    };
+
+    useEffect(() => {
+        if (userInfo.isAdmin) {
+            //show
+        } else navigate("/404");
+    });
 
     return (
         <>
@@ -16,9 +35,10 @@ const CreateBrandScreen = () => {
             </Link>
             <FormContainer>
                 <h1>Add new Brand</h1>
-                <Message variant={"success"}>Brand Added </Message>
-                {/* <Message variant={"dangerous"}></Message> */}
-                <Form>
+                {success && <Message variant={"success"}>Brand Added </Message>}
+                {error && <Message variant={"dangerous"}></Message>}
+                {loading && <Loader />}
+                <Form onSubmit={onSubmitHandler}>
                     <Form.Group controlId="name">
                         <Form.Label>Name</Form.Label>
                         <Form.Control

@@ -25,7 +25,7 @@ const createBrand = asyncHandler(async (req, res) => {
     const slug = slugify(name);
 
     const existedBrand = await Brand.find({name: name});
-    if (existedBrand) {
+    if (existedBrand.length > 0) {
         res.status(400);
         throw new Error("Brand already existed");
     }
