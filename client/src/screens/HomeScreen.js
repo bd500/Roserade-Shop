@@ -43,7 +43,18 @@ function HomeScreen() {
                             <h1>Search Result for "{keyword}"</h1>
                         )}
                         {!keyword && <ProductsCarousel />}
-                        {!keyword && <h2 className="mt-3">Latest products</h2>}
+                        {!keyword && (
+                            <div>
+                                <h2 className="mt-3">Latest products</h2>{" "}
+                                <hr
+                                    style={{
+                                        width: "200px",
+                                        height: "1px",
+                                        display: "flex",
+                                    }}
+                                />
+                            </div>
+                        )}
                         {productsList.products.map((product) => (
                             <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                                 <Product product={product} />

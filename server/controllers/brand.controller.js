@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Brand from "../models/brand.model.js";
 import slugify from "slugify";
+import {isValidObjectId} from "mongoose";
 
 const getAllBrands = asyncHandler(async (req, res) => {
     const brands = await Brand.find();
@@ -13,9 +14,13 @@ const getAllBrands = asyncHandler(async (req, res) => {
 const getProductByBrand = asyncHandler(async (req, res) => {
     const {id} = req.params;
 
-    const brand = await Brand.findById(id).populate("product");
+    const brand = await Brand.findOne({
+        $or: [{_id: isValidObjectId(id) ? id : undefined}, {slug: id}],
+    });
 
     if (!brand) res.json({message: "No product found for this brand"});
+
+    res.json(brand);
 });
 
 //Private Routes

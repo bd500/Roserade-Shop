@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Category from "../models/category.model.js";
 import slugify from "slugify";
+import {isValidObjectId} from "mongoose";
 
 const getAllCategory = asyncHandler(async (req, res) => {
     const category = await Category.find();
@@ -16,7 +17,9 @@ const getAllCategory = asyncHandler(async (req, res) => {
 const getProductByCategory = asyncHandler(async (req, res) => {
     const {id} = req.params;
 
-    const product = await Category.findById(id).populate("product");
+    const product = await Category.findOne({
+        $or: [{_id: isValidObjectId(id) ? id : undefined}, {slug: id}],
+    });
 
     if (!product) {
         res.status(404);

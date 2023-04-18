@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Product from "../models/product.model.js";
+import {isValidObjectId} from "mongoose";
 
 const getProducts = asyncHandler(async (req, res) => {
     const pageSize = 20;
@@ -23,7 +24,11 @@ const getProducts = asyncHandler(async (req, res) => {
 });
 
 const getProductById = asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    const {id} = req.params;
+
+    const product = await Product.findOne({
+        $or: [{_id: isValidObjectId(id) ? id : undefined}, {slug: id}],
+    });
 
     if (product) res.json(product);
     else {
