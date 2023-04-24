@@ -41,6 +41,10 @@ const brand = [
         name: "Madewell",
         slug: "madewell",
     },
+    {
+        name: "Lulus",
+        slug: "lulus",
+    },
 ];
 
 export default brand;

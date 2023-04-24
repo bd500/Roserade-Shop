@@ -17,3 +17,30 @@ a {
     margin-top: 12px;
     margin-bottom: 12px;
 }
+
+.banner {
+    position: relative;
+}
+
+.banner-content {
+    position: absolute;
+    bottom: 32px;
+    left: 64px;
+    width: 35%;
+    margin: 8px;
+    font-size: 0.9vw;
+}
+
+.banner-content-text {
+    margin: 0 0 16px;
+}
+
+@media (max-width: 575.98px) {
+    .banner-content-text {
+        font-size: 10px;
+    }
+}
+
+.nav-hover .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}

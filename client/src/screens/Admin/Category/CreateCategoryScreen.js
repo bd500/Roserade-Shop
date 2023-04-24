@@ -40,7 +40,7 @@ const CreateCategoryScreen = () => {
                 {error && <Message variant={"danger"}>{error}</Message>}
                 {loading && <Loader />}
                 <Form onSubmit={onSubmitHandler}>
-                    <Form.Group controlId="name">
+                    <Form.Group controlId="name" className="mb-3">
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             type="text"

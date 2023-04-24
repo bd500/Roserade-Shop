@@ -94,12 +94,12 @@ const products = [
         slug: "stussy-nike-air-max-2013",
     },
     {
-        name: "Floral Maxi Dress",
-        slug: "floral-maxi-dress",
-        image: "https://example.com/images/floral-maxi-dress.jpg",
+        name: "Molinetto Navy Blue Lace Ruffled Tiered Sleeveless Maxi Dress",
+        slug: "molinetto-navy-blue-lace-ruffled-tiered-sleeveless-maxi-dress",
+        image: "/images/monlinetto-maxi-dress.jpg",
         description:
             "Embrace the floral trend with this stunning maxi dress. Featuring a flowing skirt and adjustable straps, it's perfect for a summer day out.",
-        brand: "Sunflower",
+        brand: "Lulus",
         category: "Dresses",
         price: 59.99,
         countInStock: 25,
@@ -113,7 +113,7 @@ const products = [
     {
         name: "High Waisted Skinny Jeans",
         slug: "high-waisted-skinny-jeans",
-        image: "https://example.com/images/high-waisted-skinny-jeans.jpg",
+        image: "/images/high-waist-skinny-jeans.jpg",
         description:
             "These skinny jeans hug your curves in all the right places, thanks to their high-waisted design. Made from stretchy denim, they're comfortable enough for all-day wear.",
         brand: "Levi's",
@@ -131,7 +131,7 @@ const products = [
     {
         name: "Striped Button-Down Shirt",
         slug: "striped-button-down-shirt",
-        image: "https://example.com/images/striped-button-down-shirt.jpg",
+        image: "/images/stripe-button-shirt",
         description:
             "This classic button-down shirt features a timeless stripe pattern and a relaxed fit. Dress it up with slacks or down with jeans for a versatile look.",
         brand: "Gap",
@@ -150,7 +150,7 @@ const products = [
     {
         name: "Quilted Jacket",
         slug: "quilted-jacket",
-        image: "https://example.com/images/quilted-jacket.jpg",
+        image: "/images/quilted-jacket.jpg",
         description:
             "Stay warm and stylish with this quilted jacket. Featuring a zip-up front and cozy lining, it's perfect for chilly days.",
         brand: "North Face",
@@ -168,7 +168,7 @@ const products = [
     {
         name: "Wrap Skirt",
         slug: "wrap-skirt",
-        image: "https://example.com/images/wrap-skirt.jpg",
+        image: "/images/wrap-midi-skirt.jpg",
         description:
             "This elegant wrap skirt features a flattering A-line silhouette and a chic tie at the waist. Dress it up with heels or down with sneakers for a versatile look.",
         brand: "Madewell",

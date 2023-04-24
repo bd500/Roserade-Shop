@@ -39,7 +39,7 @@ const CreateBrandScreen = () => {
                 {error && <Message variant={"dangerous"}></Message>}
                 {loading && <Loader />}
                 <Form onSubmit={onSubmitHandler}>
-                    <Form.Group controlId="name">
+                    <Form.Group controlId="name" className="mb-3">
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             type="text"

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Row, Col, Image} from "react-bootstrap";
+import React, {useEffect} from "react";
+import {Row, Col, Image, Button} from "react-bootstrap";
 import Product from "../components/Product";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProducts} from "../slices/productSlice";
@@ -16,7 +16,7 @@ function HomeScreen() {
 
     const {keyword, pageNumber} = useParams();
 
-    const currentUser = JSON.parse(localStorage.getItem("userInfo"));
+    //const currentUser = JSON.parse(localStorage.getItem("userInfo"));
 
     useEffect(() => {
         dispatch(fetchProducts({keyword, pageNumber}));
@@ -34,11 +34,26 @@ function HomeScreen() {
                 ) : (
                     <>
                         {!keyword ? (
-                            <Image
-                                src="/images/banner.png"
-                                fluid
-                                alt="banner"
-                            />
+                            <div className="banner">
+                                <Image
+                                    src="/images/banner.png"
+                                    fluid
+                                    alt="banner"
+                                />
+                                <div className="banner-content">
+                                    <h3>
+                                        Shop the Latest Trends with Our Online
+                                        Store!
+                                    </h3>
+                                    <div className="banner-content-text">
+                                        We have everything you need to look and
+                                        feel your best.
+                                    </div>
+                                    <Button variant="outline-dark">
+                                        Shop Now
+                                    </Button>
+                                </div>
+                            </div>
                         ) : (
                             <h1>Search Result for "{keyword}"</h1>
                         )}

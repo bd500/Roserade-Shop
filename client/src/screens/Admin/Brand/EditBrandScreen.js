@@ -41,7 +41,7 @@ const EditBrandScreen = () => {
                 {updated && <Message variant="success">Brand Updated</Message>}
                 {error && <Message variant="danger">{error}</Message>}
                 <Form onSubmit={submitHandler}>
-                    <Form.Group>
+                    <Form.Group className="mb-3">
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             value={name}

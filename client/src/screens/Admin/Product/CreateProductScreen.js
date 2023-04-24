@@ -1,19 +1,23 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import {Form, Button} from "react-bootstrap";
+import {Form, Button, InputGroup, Row, Col} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import FormContainer from "../../../components/FormContainer";
 import Loader from "../../../components/Loader";
 import Message from "../../../components/Message";
 import Meta from "../../../components/Meta";
 import {createProduct} from "../../../slices/productSlice";
+import {getAllCategories} from "../../../slices/categorySlice";
+import {getAllBrands} from "../../../slices/brandSlice";
 
 function CreateProductScreen() {
     const dispatch = useDispatch();
     const {loading, error, success} = useSelector(
         (state) => state.productsList
     );
+    const {brands} = useSelector((state) => state.brands);
+    const {categories} = useSelector((state) => state.categories);
 
     const navigate = useNavigate();
     // const {id} = useParams();
@@ -22,6 +26,7 @@ function CreateProductScreen() {
 
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
+    const [sale, setSale] = useState(0);
     const [image, setImage] = useState("");
     const [brand, setBrand] = useState("");
     const [category, setCategory] = useState("");
@@ -32,10 +37,20 @@ function CreateProductScreen() {
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
             //do something
+            dispatch(getAllCategories());
+            dispatch(getAllBrands());
         } else {
             navigate("/404");
         }
     }, []);
+
+    function selectOptions(opts) {
+        return opts.map((item) => (
+            <option key={item._id} value={item.name}>
+                {item.name}
+            </option>
+        ));
+    }
 
     function submitHandler(e) {
         e.preventDefault();
@@ -93,7 +108,7 @@ function CreateProductScreen() {
                     <Message variant={"danger"}>{error}</Message>
                 ) : (
                     <Form onSubmit={submitHandler}>
-                        <Form.Group controlId="name">
+                        <Form.Group controlId="name" className="mb-3">
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                                 type="text"
@@ -102,15 +117,41 @@ function CreateProductScreen() {
                                 onChange={(e) => setName(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
-                        <Form.Group controlId="price">
-                            <Form.Label>Price</Form.Label>
-                            <Form.Control
-                                placeholder="Enter price"
-                                value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                            ></Form.Control>
-                        </Form.Group>
-                        <Form.Group controlId="image">
+                        <Row>
+                            <Form.Group
+                                controlId="price"
+                                className="mb-3"
+                                as={Col}
+                                md="6"
+                            >
+                                <Form.Label>Price</Form.Label>
+                                <Form.Control
+                                    placeholder="Enter price"
+                                    value={price}
+                                    onChange={(e) => setPrice(e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
+                            <Form.Group
+                                className="mb-3"
+                                controlId="salegroup"
+                                as={Col}
+                                md="6"
+                            >
+                                <Form.Label>Sale Percentage</Form.Label>
+
+                                <InputGroup controlId="sale">
+                                    <Form.Control
+                                        placeholder="Enter sale percentage"
+                                        value={sale}
+                                        onChange={(e) =>
+                                            setSale(e.target.value)
+                                        }
+                                    ></Form.Control>
+                                    <InputGroup.Text>%</InputGroup.Text>
+                                </InputGroup>
+                            </Form.Group>
+                        </Row>
+                        <Form.Group controlId="image" className="mb-3">
                             <Form.Label>Image URL</Form.Label>
                             <Form.Control
                                 placeholder="Select Image"
@@ -121,30 +162,68 @@ function CreateProductScreen() {
                                 type="file"
                                 onChange={uploadFileHandler}
                             />
+                            <Form.Text muted>
+                                You can either choose image from computer or use
+                                an image URL.
+                            </Form.Text>
                         </Form.Group>
-                        <Form.Group controlId="brand">
+                        <Form.Group controlId="brand" className="mb-3">
                             <Form.Label>Brand</Form.Label>
-                            <Form.Control
-                                placeholder="Enter brand"
-                                value={brand}
+                            <Form.Select
                                 onChange={(e) => setBrand(e.target.value)}
-                            ></Form.Control>
+                            >
+                                <option value="">Choose a Brand</option>
+                                {selectOptions(brands)}
+                            </Form.Select>
+                            <Form.Text>
+                                Want to add a new brand?{" "}
+                                {
+                                    <Link to="/admin/brands/create">
+                                        Click Here!
+                                    </Link>
+                                }
+                            </Form.Text>
                         </Form.Group>
-                        <Form.Group controlId="category">
+                        <Form.Group controlId="category" className="mb-3">
                             <Form.Label>Category</Form.Label>
-                            <Form.Control
-                                placeholder="Enter category"
-                                value={category}
+                            <Form.Select
                                 onChange={(e) => setCategory(e.target.value)}
-                            ></Form.Control>
+                            >
+                                <option value="">Choose a Cateogry</option>
+                                {selectOptions(categories)}
+                            </Form.Select>
+                            <Form.Text>
+                                Want to add a new category?{" "}
+                                {
+                                    <Link to="/admin/categories/create">
+                                        Click Here!
+                                    </Link>
+                                }
+                            </Form.Text>
                         </Form.Group>
-                        <Form.Group controlId="description">
+                        <Form.Group controlId="description" className="mb-3">
                             <Form.Label>Description</Form.Label>
                             <Form.Control
+                                as="textarea"
+                                rows={3}
                                 placeholder="Enter description"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="stock" className="mb-3">
+                            <Form.Label>Count In Stock</Form.Label>
+                            <Form.Control
+                                placeholder="Enter number of stocks"
+                                value={countInStock}
+                                onChange={(e) =>
+                                    setCountInStock(e.target.value)
+                                }
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Sizes</Form.Label>
+                            <p>None</p>
                         </Form.Group>
                         <Button type="submit" className="my-3">
                             Add

@@ -5,7 +5,6 @@ import Message from "../../../components/Message";
 import {Button, Form} from "react-bootstrap";
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {updateBrand} from "../../../slices/brandSlice";
 import Loader from "../../../components/Loader";
 import {useNavigate, useParams} from "react-router-dom";
 import {updateCategory} from "../../../slices/categorySlice";
@@ -49,7 +48,7 @@ const EditCategoryScreen = () => {
                     <Message variant="danger">{error}</Message>
                 ) : (
                     <Form onSubmit={submitHandler}>
-                        <Form.Group>
+                        <Form.Group className="mb-3">
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                                 value={name}

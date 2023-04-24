@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
     Container,
     Nav,
@@ -11,9 +11,10 @@ import {
 } from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
-import {Routes, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {logout} from "../slices/loginSlice";
 import SearchBox from "./SearchBox";
+import MultiLevelDropDown from "./MultiLevelDropDown";
 
 function Header() {
     const dispatch = useDispatch();
@@ -21,6 +22,10 @@ function Header() {
 
     const navigate = useNavigate();
     const cartItems = localStorage.getItem("cartItems") || [];
+
+    useEffect(() => {
+        //do something else
+    }, [dispatch]);
 
     function logoutHandler() {
         dispatch(logout());
@@ -40,9 +45,7 @@ function Header() {
                 <LinkContainer to={"/"}>
                     <Navbar.Brand>Roserade Shop</Navbar.Brand>
                 </LinkContainer>
-                <Nav className="me-auto">
-                    <Nav.Item>Discover</Nav.Item>
-                </Nav>
+                <MultiLevelDropDown />
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto align-items-center">

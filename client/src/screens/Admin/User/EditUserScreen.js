@@ -61,7 +61,7 @@ function EditUserScreen() {
                     <Message variant={"danger"}>{error}</Message>
                 ) : (
                     <Form onSubmit={submitHandler}>
-                        <Form.Group controlId="email">
+                        <Form.Group controlId="email" className="mb-3">
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
                                 type="email"
@@ -70,7 +70,7 @@ function EditUserScreen() {
                                 onChange={(e) => setEmail(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
-                        <Form.Group controlId="name">
+                        <Form.Group controlId="name" className="mb-3">
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                                 type="text"
@@ -79,7 +79,7 @@ function EditUserScreen() {
                                 onChange={(e) => setName(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
-                        <Form.Group controlId="isAdmin">
+                        <Form.Group controlId="isAdmin" className="mb-3">
                             <Form.Check
                                 type="checkbox"
                                 label="Is Admin"
