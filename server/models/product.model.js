@@ -45,16 +45,22 @@ const productSchema = mongoose.Schema(
             required: true,
         },
         brand: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
             required: true,
+            ref: "Brand",
         },
         category: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
             required: true,
+            ref: "Category",
         },
         price: {
             type: Number,
             required: true,
+            default: 0,
+        },
+        sale: {
+            type: Number,
             default: 0,
         },
         countInStock: {

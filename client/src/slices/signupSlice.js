@@ -40,6 +40,6 @@ const signupSlice = createSlice({
     },
 });
 
-const {reducer, actions} = signupSlice;
+const {reducer} = signupSlice;
 export default reducer;
 export {signup};

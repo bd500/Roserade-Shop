@@ -1,13 +1,12 @@
-import {useEffect, useState} from "react";
-import {Dropdown, Nav} from "react-bootstrap";
+import {useEffect} from "react";
+import {Nav, NavDropdown} from "react-bootstrap";
+import {DropdownSubmenu, NavDropdownMenu} from "react-bootstrap-submenu";
 import {getAllBrands} from "../slices/brandSlice";
 import {getAllCategories} from "../slices/categorySlice";
 import {useSelector, useDispatch} from "react-redux";
+import "react-bootstrap-submenu/dist/index.css";
 
 const MultiLevelDropDown = () => {
-    const [show, setShow] = useState(false);
-    const [nestedShow, setNestedShow] = useState(false);
-
     const {brands} = useSelector((state) => state.brands);
     const {categories} = useSelector((state) => state.categories);
     const dispatch = useDispatch();
@@ -17,55 +16,28 @@ const MultiLevelDropDown = () => {
         dispatch(getAllCategories());
     }, [dispatch]);
 
-    const handleShow = () => {
-        setShow(true);
-    };
-
-    const handleHide = () => {
-        setShow(false);
-        setNestedShow(false);
-    };
-
-    const handleNestedShow = () => {
-        setNestedShow(true);
-    };
-
-    const handleNestedHide = () => {
-        setNestedShow(false);
+    const setSelectOptions = (opts, page) => {
+        return opts.map((item) => (
+            <NavDropdown.Item href={`/${page}/${item.slug}`}>
+                {item.name}
+            </NavDropdown.Item>
+        ));
     };
 
     return (
         <Nav>
-            <Dropdown
-                show={show}
-                onMouseEnter={handleShow}
-                onMouseLeave={handleHide}
-            >
-                <Dropdown.Toggle as={Nav.Link}>Dropdown Item</Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item
-                        href="#action/1"
-                        onMouseEnter={handleNestedShow}
-                        onMouseLeave={handleNestedHide}
-                    >
-                        Action
-                        <Dropdown.Menu show={nestedShow}>
-                            <Dropdown.Item href="#action/2">
-                                Nested Action 1
-                            </Dropdown.Item>
-                            <Dropdown.Item href="#action/3">
-                                Nested Action 2
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#action/4">
-                        Another action
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#action/5">
-                        Something else here
-                    </Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
+            <NavDropdownMenu title="Explore">
+                <NavDropdown.Item href="/all">All Product</NavDropdown.Item>
+                <DropdownSubmenu title="Brands" className="nav-hover">
+                    {setSelectOptions(brands, "brand")}
+                </DropdownSubmenu>
+                <DropdownSubmenu title="Categories">
+                    {setSelectOptions(categories, "category")}
+                </DropdownSubmenu>
+                <NavDropdown.Item href="/sale">
+                    On Sale Products
+                </NavDropdown.Item>
+            </NavDropdownMenu>
         </Nav>
     );
 };

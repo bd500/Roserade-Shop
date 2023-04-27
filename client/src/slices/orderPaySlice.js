@@ -44,6 +44,6 @@ const orderPaySlice = createSlice({
     },
 });
 
-const {reducer, action} = orderPaySlice;
+const {reducer} = orderPaySlice;
 export default reducer;
 export {updateOrderToPaid};

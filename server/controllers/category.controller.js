@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import Category from "../models/category.model.js";
 import slugify from "slugify";
 import {isValidObjectId} from "mongoose";
+import Product from "../models/product.model.js";
 
 const getAllCategory = asyncHandler(async (req, res) => {
     const category = await Category.find();
@@ -17,16 +18,20 @@ const getAllCategory = asyncHandler(async (req, res) => {
 const getProductByCategory = asyncHandler(async (req, res) => {
     const {id} = req.params;
 
-    const product = await Category.findOne({
+    const category = await Category.findOne({
         $or: [{_id: isValidObjectId(id) ? id : undefined}, {slug: id}],
     });
 
-    if (!product) {
+    if (!category) {
         res.status(404);
         throw new Error("No product found for this category");
     }
 
-    res.json(product);
+    const products = await Product.find({
+        category: category._id,
+    }).populate("category", "id name");
+
+    res.json(products);
 });
 
 //Private Routes

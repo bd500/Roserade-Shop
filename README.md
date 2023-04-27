@@ -6,6 +6,13 @@ This is the build in project for the course by Brad Traversy on Udemy. You can s
 
 Roserade Shop is a simple e-commerce site for fashion clothes using MERN stack.
 
+## To-Do List
+
+-   [ ] Deconstruct cart item to into component.
+-   [ ] Card payment
+-   [ ] Modify cart item quantity inside user's cart
+-   [ ] Separate Cart feature into guest's cart and user's cart
+
 ## Features
 
 -   Shopping cart for guest (cart items will be stored on LocalStorage if user is not login)

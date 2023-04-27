@@ -16,7 +16,7 @@ function SearchBox() {
     }
 
     const popover = (
-        <Popover id="popover-contained">
+        <Popover id="popover-contained" style={{width: "500px"}}>
             <Popover.Body>
                 <Form onSubmit={submitHandler}>
                     <InputGroup>

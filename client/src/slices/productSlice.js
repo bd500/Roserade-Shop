@@ -13,6 +13,16 @@ const fetchProducts = createAsyncThunk(
     }
 );
 
+const fetchSale = createAsyncThunk(
+    "products/fetchSale",
+    async ({pageNumber = ""}) => {
+        const {data} = await axios
+            .get(`/api/products/sale?pageNumber=${pageNumber}`)
+            .catch((err) => console.log(err.message));
+        return data;
+    }
+);
+
 const fetchProductById = createAsyncThunk(
     "products/getProductById",
     async (id) => {
@@ -170,6 +180,22 @@ const productSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
         });
+
+        builder.addCase(fetchSale.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(fetchSale.fulfilled, (state, action) => {
+            state.loading = false;
+            state.products = action.payload.products;
+            state.page = action.payload.page;
+            state.pages = action.payload.pages;
+            state.error = "";
+        });
+        builder.addCase(fetchSale.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+
         //get product by id
         builder.addCase(fetchProductById.pending, (state) => {
             state.loading = true;
@@ -252,7 +278,7 @@ const productSlice = createSlice({
     },
 });
 
-const {reducer, action} = productSlice;
+const {reducer} = productSlice;
 export default reducer;
 export {
     fetchProducts,
@@ -262,4 +288,5 @@ export {
     fetchProductById,
     updateProduct,
     createProductReview,
+    fetchSale,
 };

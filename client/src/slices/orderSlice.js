@@ -133,6 +133,6 @@ const orderSlice = createSlice({
     },
 });
 
-const {reducer, action} = orderSlice;
+const {reducer} = orderSlice;
 export default reducer;
 export {createOrder, getOrderById, updateOrderToDelivered};

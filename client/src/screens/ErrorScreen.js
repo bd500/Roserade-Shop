@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Row} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import Meta from "../components/Meta";
 

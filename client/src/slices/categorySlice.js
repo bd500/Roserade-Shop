@@ -10,6 +10,7 @@ const initialState = {
     loading: false,
     deleted: false,
     updated: false,
+    products: [],
 };
 
 const addCategory = createAsyncThunk(
@@ -39,6 +40,20 @@ const getAllCategories = createAsyncThunk("/categories/getAll", async () => {
     const {data} = await axios.get("/api/categories", config);
     return data;
 });
+
+const getProductsCategory = createAsyncThunk(
+    "/categories/getProduct",
+    async (id) => {
+        const config = {
+            headers: {
+                "Content-type": "application/json",
+            },
+        };
+
+        const {data} = await axios.get(`/api/categories/${id}`, config);
+        return data;
+    }
+);
 
 const updateCategory = createAsyncThunk(
     "/categories/update",
@@ -93,14 +108,26 @@ const categorySlice = createSlice({
         builder.addCase(getAllCategories.pending, (state) => {
             state.loading = true;
             state.error = "";
-            state.success = false;
         });
         builder.addCase(getAllCategories.fulfilled, (state, action) => {
             state.loading = false;
-            state.success = true;
             state.categories = action.payload;
         });
         builder.addCase(getAllCategories.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+
+        //get category products
+        builder.addCase(getProductsCategory.pending, (state) => {
+            state.loading = true;
+            state.error = "";
+        });
+        builder.addCase(getProductsCategory.fulfilled, (state, action) => {
+            state.loading = false;
+            state.products = action.payload;
+        });
+        builder.addCase(getProductsCategory.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message;
         });
@@ -140,4 +167,10 @@ const categorySlice = createSlice({
 const {reducer} = categorySlice;
 
 export default reducer;
-export {addCategory, getAllCategories, updateCategory, deleteCategory};
+export {
+    addCategory,
+    getAllCategories,
+    updateCategory,
+    deleteCategory,
+    getProductsCategory,
+};

@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {Button, Row, Col, Form, FormCheck, Image} from "react-bootstrap";
+import React from "react";
+import {Button, Col, Form, FormCheck, Image} from "react-bootstrap";
 import FormContainer from "../../components/FormContainer";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";

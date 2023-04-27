@@ -27,6 +27,11 @@ import EditBrandScreen from "./screens/Admin/Brand/EditBrandScreen";
 import CreateCategoryScreen from "./screens/Admin/Category/CreateCategoryScreen";
 import CategoryListScreen from "./screens/Admin/Category/CategoryListScreen";
 import EditCategoryScreen from "./screens/Admin/Category/EditCategoryScreen";
+import AllProudctScreen from "./screens/Explore/AllProductsScreen";
+import SaleScreen from "./screens/Explore/SaleScreen";
+import BrandScreen from "./screens/Explore/BrandScreen";
+import CategoryScreen from "./screens/Explore/CategoryScreen";
+import ExploreScreen from "./screens/Explore/ExploreScreen";
 
 function App() {
     return (
@@ -64,6 +69,14 @@ function App() {
                             element={<PlaceOrderScreen />}
                         />
                         <Route path="/order/:id" element={<OrderScreen />} />
+                        <Route path="/all" element={<AllProudctScreen />} />
+                        <Route path="/sale" element={<SaleScreen />} />
+                        <Route path="/explore" element={<ExploreScreen />} />
+                        <Route path="/brand/:id" element={<BrandScreen />} />
+                        <Route
+                            path="/category/:id"
+                            element={<CategoryScreen />}
+                        />
 
                         {/***************  Admin Routes ***************/}
                         {/**** Users */}

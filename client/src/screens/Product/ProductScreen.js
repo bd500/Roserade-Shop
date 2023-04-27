@@ -1,5 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {Row, Col, ListGroup, Card, Button, Image, Form} from "react-bootstrap";
+import {
+    Row,
+    Col,
+    ListGroup,
+    Card,
+    Button,
+    Image,
+    Form,
+    InputGroup,
+} from "react-bootstrap";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import Rating from "../../components/Rating";
 import {useDispatch, useSelector} from "react-redux";
@@ -20,7 +29,7 @@ function ProductScreen() {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
-    const {loading, product, error, success} = useSelector(
+    const {loading, product, error} = useSelector(
         (state) => state.productsList
     );
 
@@ -28,8 +37,12 @@ function ProductScreen() {
         dispatch(fetchProductById(id));
     }, [dispatch]);
 
-    function handleQtyChanged(event) {
-        setQty(event.target.value);
+    function setOptions(opts) {
+        return opts.map((item) => (
+            <option key={item._id} value={item.value}>
+                item
+            </option>
+        ));
     }
 
     function addToCartHandler() {
@@ -114,41 +127,50 @@ function ProductScreen() {
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
-                                    {product.countInStock > 0 && (
-                                        <ListGroup.Item>
+                                    <ListGroup.Item>
+                                        <Row>
+                                            <Col>Sizes</Col>
+                                            <Col>
+                                                <Form.Select required>
+                                                    <option key="none" value="">
+                                                        Select
+                                                    </option>
+                                                </Form.Select>
+                                            </Col>
+                                        </Row>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                        {product.countInStock > 0 ? (
                                             <Row>
-                                                <Col>Quatity: </Col>
+                                                <Col>Quatity:</Col>
                                                 <Col>
-                                                    <Form.Select
-                                                        //as="select"
-                                                        value={qty}
-                                                        onChange={
-                                                            handleQtyChanged
-                                                        }
-                                                    >
-                                                        <option
-                                                            key="0"
-                                                            value=""
-                                                        >
-                                                            Select
-                                                        </option>
-                                                        {[
-                                                            ...Array(
+                                                    <InputGroup>
+                                                        <Form.Control
+                                                            type="number"
+                                                            value={qty}
+                                                            onChange={(e) =>
+                                                                setQty(
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            }
+                                                            required
+                                                            defaultValue={0}
+                                                            disabled={
+                                                                qty >=
                                                                 product.countInStock
-                                                            ).keys(),
-                                                        ].map((x) => (
-                                                            <option
-                                                                key={x + 1}
-                                                                value={x + 1}
-                                                            >
-                                                                {x + 1}
-                                                            </option>
-                                                        ))}
-                                                    </Form.Select>
+                                                                    ? true
+                                                                    : false
+                                                            }
+                                                        ></Form.Control>
+                                                    </InputGroup>
                                                 </Col>
                                             </Row>
-                                        </ListGroup.Item>
-                                    )}
+                                        ) : (
+                                            <Row>Out of Stock</Row>
+                                        )}
+                                    </ListGroup.Item>
+
                                     <ListGroup.Item>
                                         <Row>
                                             <Button

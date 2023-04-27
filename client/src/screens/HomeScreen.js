@@ -59,15 +59,9 @@ function HomeScreen() {
                         )}
                         {!keyword && <ProductsCarousel />}
                         {!keyword && (
-                            <div>
+                            <div className="my-5 line-container">
                                 <h2 className="mt-3">Latest products</h2>{" "}
-                                <hr
-                                    style={{
-                                        width: "200px",
-                                        height: "1px",
-                                        display: "flex",
-                                    }}
-                                />
+                                <div className="line"></div>
                             </div>
                         )}
                         {productsList.products.map((product) => (

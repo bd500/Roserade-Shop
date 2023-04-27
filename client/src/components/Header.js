@@ -21,11 +21,13 @@ function Header() {
     const {userInfo} = useSelector((state) => state.login);
 
     const navigate = useNavigate();
-    const cartItems = localStorage.getItem("cartItems") || [];
+
+    let cartItems = JSON.parse(localStorage.getItem("cart"));
 
     useEffect(() => {
         //do something else
-    }, [dispatch]);
+        cartItems = localStorage.getItem("cart");
+    }, [dispatch, cartItems]);
 
     function logoutHandler() {
         dispatch(logout());

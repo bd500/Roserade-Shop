@@ -60,6 +60,6 @@ const userDetailsSlice = createSlice({
     },
 });
 
-const {reducer, actions} = userDetailsSlice;
+const {reducer} = userDetailsSlice;
 export default reducer;
 export {updateUser};

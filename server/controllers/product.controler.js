@@ -23,6 +23,27 @@ const getProducts = asyncHandler(async (req, res) => {
     res.json({products, page, pages: Math.ceil(count / pageSize)});
 });
 
+const getSale = asyncHandler(async (req, res) => {
+    const pageSize = 20;
+    const page = Number(req.query.pageNumber) || 1;
+
+    const count = await Product.countDocuments({
+        sale: {
+            $gt: 0,
+        },
+    });
+
+    const products = await Product.find({
+        sale: {
+            $gt: 0,
+        },
+    })
+        .limit(pageSize)
+        .skip(pageSize * (page - 1));
+
+    res.json({products, page, pages: Math.ceil(count / pageSize)});
+});
+
 const getProductById = asyncHandler(async (req, res) => {
     const {id} = req.params;
 
@@ -150,4 +171,5 @@ export {
     updateProduct,
     createProduct,
     createReview,
+    getSale,
 };

@@ -10,6 +10,7 @@ const initialState = {
     loading: false,
     deleted: false,
     updated: false,
+    products: [],
 };
 
 const addBrand = createAsyncThunk("/brands/addBrand", async (name) => {
@@ -32,6 +33,19 @@ const getAllBrands = createAsyncThunk("/brands/getAll", async () => {
     };
 
     const {data} = await axios.get("/api/brands", config);
+    return data;
+});
+
+const getProductsBrand = createAsyncThunk("/brands/getProduct", async (id) => {
+    const config = {
+        headers: {
+            "Content-type": "application/json",
+        },
+    };
+
+    const {data} = await axios
+        .get(`/api/brands/${id}`, config)
+        .catch((err) => console.log(err));
     return data;
 });
 
@@ -85,14 +99,26 @@ const brandSlice = createSlice({
         builder.addCase(getAllBrands.pending, (state) => {
             state.loading = true;
             state.error = "";
-            state.success = false;
         });
         builder.addCase(getAllBrands.fulfilled, (state, action) => {
             state.loading = false;
-            state.success = true;
             state.brands = action.payload;
         });
         builder.addCase(getAllBrands.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+
+        //get brand products
+        builder.addCase(getProductsBrand.pending, (state) => {
+            state.loading = true;
+            state.error = "";
+        });
+        builder.addCase(getProductsBrand.fulfilled, (state, action) => {
+            state.loading = false;
+            state.products = action.payload;
+        });
+        builder.addCase(getProductsBrand.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message;
         });
@@ -101,11 +127,11 @@ const brandSlice = createSlice({
         builder.addCase(updateBrand.pending, (state) => {
             state.loading = true;
             state.error = "";
-            state.success = false;
+            state.updated = false;
         });
         builder.addCase(updateBrand.fulfilled, (state, action) => {
             state.loading = false;
-            state.success = true;
+            state.updated = true;
         });
         builder.addCase(updateBrand.rejected, (state, action) => {
             state.loading = false;
@@ -131,7 +157,7 @@ const brandSlice = createSlice({
     },
 });
 
-const {reducer, action} = brandSlice;
+const {reducer} = brandSlice;
 
 export default reducer;
-export {addBrand, getAllBrands, updateBrand, deleteBrand};
+export {addBrand, getAllBrands, updateBrand, deleteBrand, getProductsBrand};

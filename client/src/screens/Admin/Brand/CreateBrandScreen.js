@@ -25,7 +25,7 @@ const CreateBrandScreen = () => {
         if (userInfo.isAdmin) {
             //show
         } else navigate("/404");
-    });
+    }, [dispatch]);
 
     return (
         <>

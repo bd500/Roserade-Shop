@@ -74,7 +74,7 @@ function EditProductScreen() {
 
     function selectOptions(opts) {
         return opts.map((item) => (
-            <option key={item._id} value={item.name}>
+            <option key={item._id} value={item._id}>
                 {item.name}
             </option>
         ));

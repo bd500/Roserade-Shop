@@ -1,16 +1,16 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Col,
-    Container,
     ListGroup,
     Row,
     Image,
     Button,
     Card,
     ListGroupItem,
+    Form,
 } from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {addItemToCart, removeItem} from "../../slices/cartSlice";
 import Message from "../../components/Message";
 import Meta from "../../components/Meta";
@@ -70,7 +70,12 @@ function CartScreen() {
                                         <Col md={2}>
                                             $ {item.price.toFixed(2)}
                                         </Col>
-                                        <Col md={2}>{item.qty}</Col>
+                                        <Col md={2}>
+                                            <Form.Control
+                                                value={item.qty}
+                                                type="number"
+                                            />
+                                        </Col>
                                         <Col md={2}>
                                             <Button
                                                 type="button"

@@ -5,6 +5,7 @@ import {
     deleteProduct,
     getProductById,
     getProducts,
+    getSale,
     getTopProducts,
     updateProduct,
 } from "../controllers/product.controler.js";
@@ -14,6 +15,7 @@ const router = express.Router();
 
 router.route("/").get(getProducts).post(protect, admin, createProduct);
 router.route("/top").get(getTopProducts);
+router.route("/sale").get(getSale);
 
 router
     .route("/:id")
