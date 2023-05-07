@@ -1,10 +1,10 @@
 # Roserade Shop
 
-This is the build in project for the course by Brad Traversy on Udemy. You can see it [here](https://www.udemy.com/course/mern-ecommerce).
+This is my personal project, developed from the course by Brad Traversy on Udemy. You can see it [here](https://www.udemy.com/course/mern-ecommerce).
 
 ## Overview
 
-Roserade Shop is a simple e-commerce site for fashion clothes using MERN stack.
+Roserade Shop is a e-commerce website for fashion clothes using MERN stack.
 
 ## To-Do List
 
@@ -28,10 +28,7 @@ Roserade Shop is a simple e-commerce site for fashion clothes using MERN stack.
 
 ### Note
 
-The Paypal feature running smothly in the first run but when I try it again in the second run its seem to have some unknown error which I belived is there might be something wrong with the React-Paypal-Button (?). I’m still trying to figure it out…
-**\*Update:** Nevermind I found it, the uBlock Origin extenstion from my browser blocks the paypal script, just turn it off.
-
-And also when I finished this project I remember I had forgot to add the size button for product… I will update it soon...
+This is my personal project, and I'm still working on it by adding more features.
 
 ## Technologies
 
@@ -111,4 +108,4 @@ bao@quoc.com
 
 ## Acknowledgements
 
-I would like to thank Brad for the fantastic course he had prodived. This course is very well designed and informative, it covers all the necessary topics for building a e-commerce with MERN stack. An unforunate aspect of this course is that some parts of its seem a little bit outdated which are: React-Router-DOM v5, Redux, Paypal Button. And for those reasons, I've re-writtten all of it. But it's still a amazing course after all.
+I would like to thank Brad for the fantastic course he had prodived. This course is very well designed and informative, it covers all the necessary topics for building a e-commerce website with MERN stack. An unforunate aspect of this course is that some parts of its seem a little bit outdated which are: React-Router-DOM v5, Redux, Paypal Button. And for these reasons, I've re-writtten and refactor all of it. Nonetheless, It's still an amazing course.
