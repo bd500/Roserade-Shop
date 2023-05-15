@@ -1,6 +1,6 @@
 # Roserade Shop
 
-This is my personal project, developed from the course by Brad Traversy on Udemy. You can see it [here](https://www.udemy.com/course/mern-ecommerce).
+This is my personal project, developed from the course by Brad Traversy on Udemy. You can see the course [here](https://www.udemy.com/course/mern-ecommerce).
 
 ## Overview
 
@@ -43,8 +43,9 @@ This is my personal project, and I'm still working on it by adding more features
 
 Sample screen shot
 
-![](https://i.imgur.com/DivNd1i.png)
-![](https://i.imgur.com/k4Uciq1.png)
+![](https://i.imgur.com/TiFKjUk.png)
+![](https://i.imgur.com/LNHNq13.png)
+![](https://i.imgur.com/Sf9GL7B.png)
 
 ## Installation
 
